@@ -1,0 +1,39 @@
+<clr-header class="header-6">
+  <div class="branding">
+    <a [routerLink]="['/home']">
+      <clr-icon shape="dollar"></clr-icon>
+      <span class="title">maxFinances</span>      
+    </a>
+  </div>
+  <!-- placeholder por enquanto -->
+  <form class="search">
+      <label for="search_input">
+          <input id="search_input" type="text" placeholder="Search for keywords...">
+      </label>
+  </form>  
+  <div class="header-actions">
+      <clr-dropdown>
+          <button class="nav-icon" clrDropdownTrigger aria-label="open user menu">
+              <clr-icon shape="user"></clr-icon>
+              <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+              <a [routerLink]="[ '/home' ]" clrDropdownItem>About</a>
+              <a [routerLink]="[ '/home' ]" clrDropdownItem>Preferences</a>
+              <a [routerLink]="[ '/home' ]"clrDropdownItem>Log out</a>
+          </clr-dropdown-menu>
+      </clr-dropdown>
+  </div>
+  <!-- fim -->
+</clr-header>
+<nav class="subnav" [clr-nav-level]="1">
+  <!-- quero deixar dinamico depois -->
+  <ul class="nav">
+    <li class="nav-item" >
+        <a class="nav-link" [routerLink]="[ '/dashboard' ]" routerLinkActive="active">Dashboard</a>
+    </li>
+    <li class="nav-item" >
+        <a class="nav-link" [routerLink]="[ '/home' ]" routerLinkActive="active">Finanças</a>
+    </li>
+  </ul>
+</nav>
