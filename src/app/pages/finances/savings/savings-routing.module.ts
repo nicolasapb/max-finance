@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SavingListComponent } from './saving-list/saving-list.component';
 
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/finances/payments',
-    pathMatch: 'full'
-  },
+    path: 'savings',
+    component: SavingListComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FinancesRoutingModule { }
+export class SavingsRoutingModule { }
