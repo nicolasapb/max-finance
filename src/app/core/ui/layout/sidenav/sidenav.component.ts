@@ -33,7 +33,6 @@ export class SidenavComponent implements OnDestroy {
     .subscribe({
       next: (activatedRoute: ActivatedRouteSnapshot) => {
         this.menuItems = Object.keys(activatedRoute.data).map( b => activatedRoute.data[b]);
-        console.log(this.menuItems);
       }
     });
   }

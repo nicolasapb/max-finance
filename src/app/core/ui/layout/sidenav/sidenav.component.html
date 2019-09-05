@@ -1,13 +1,7 @@
-<nav class="sidenav" [clr-nav-level]="2">
+<nav class="sidenav" [clr-nav-level]="2" *ngIf="menuItems && menuItems.length > 0">
     <section class="sidenav-content">
-        <a [routerLink]="[ '/finances/payments' ]" routerLinkActive="active" class="nav-link">
-            Pagamentos
-        </a>
-        <a [routerLink]="[ '/finances/savings' ]" routerLinkActive="active" class="nav-link">
-            Economias
-        </a>
-        <a [routerLink]="[ '/finances/simulations' ]" routerLinkActive="active" class="nav-link">
-            Simulações
+        <a [routerLink]="menuItem.path" routerLinkActive="active" *ngFor="let menuItem of menuItems" class="nav-link">
+            <span *ngIf="menuItem.icon"><clr-icon [attr.shape]="menuItem.icon"></clr-icon>&nbsp;</span>{{ menuItem.title }}
         </a>
     </section>  
 </nav>

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './core/components/home/home.component';
-import { FinancesRoutingModule } from './pages/finances/finances-routing.module';
-
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -27,7 +25,19 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then(mod => mod.DashboardModule)
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(mod => mod.DashboardModule),
+    data: [
+      {
+        path: '/finances/payments',
+        title: 'Novo pagamento',
+        icon: 'plus'
+      },
+      {
+        path: '/finances/savings',
+        title: 'Nova economia',
+        icon: 'plus'
+      }
+    ]
   }
 ];
 
