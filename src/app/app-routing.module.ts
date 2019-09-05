@@ -10,6 +10,20 @@ const routes: Routes = [
   {
     path: 'finances',
     loadChildren: () => import('./pages/finances/finances.module').then(mod => mod.FinancesModule),
+    data: [
+      {
+        path: '/finances/payments',
+        title: 'Pagamentos',
+      },
+      {
+        path: '/finances/savings',
+        title: 'Economias',
+      },
+      {
+        path: '/finances/simulations',
+        title: 'Simulações'
+      }
+    ]
   },
   {
     path: 'dashboard',

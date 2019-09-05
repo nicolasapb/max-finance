@@ -15,7 +15,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     CommonModule,
     BrowserAnimationsModule,
     BrowserModule,
-    RouterModule,
+    RouterModule.forRoot([]),
     ClarityModule,
   ],
   exports: [

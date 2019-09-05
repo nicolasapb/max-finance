@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class LayoutComponent implements OnInit {
 
-  public menuItems$: Observable<any>;
-  
   constructor() { }
 
   ngOnInit() {

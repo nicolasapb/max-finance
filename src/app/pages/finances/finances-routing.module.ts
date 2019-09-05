@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/finances/payments',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 ];
 
