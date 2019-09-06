@@ -11,10 +11,11 @@ import { IMaskModule } from 'angular-imask';
 import { CnpjPipe } from './pipes/cnpj.pipe';
 import { AccountPipe } from './pipes/account.pipe';
 import { ClarityModule } from '@clr/angular';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 
 @NgModule({
-  declarations: [CnpjPipe, AccountPipe],
+  declarations: [CnpjPipe, AccountPipe, PageHeaderComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -34,7 +35,8 @@ import { ClarityModule } from '@clr/angular';
 
     // Shared Pipes
     CnpjPipe,
-    AccountPipe
+    AccountPipe,
+    PageHeaderComponent
   ],
   providers: []
 })

@@ -1,35 +1,40 @@
-<h2>Pagamentos</h2>
+<app-page-header 
+    pageTitle="Pagamentos"
+    [spinner]="true"
+    [spinnerCondition]="!resources || resources.length == 0">
+</app-page-header>
 
-<clr-datagrid class="datagrid-compact">
-    <clr-dg-column [clrDgField]="'recipient'">Beneficiário</clr-dg-column>
-    <clr-dg-column [clrDgField]="'dueDate'">Dt. Vencimento</clr-dg-column>
-    <clr-dg-column [clrDgField]="'amount'">Valor</clr-dg-column>
-    <clr-dg-column [clrDgField]="'payDate'">Dt. Pagamento</clr-dg-column>
-    <clr-dg-column [clrDgField]="'payAmount'">Valor Pago</clr-dg-column>
-    <clr-dg-column [clrDgField]="'auth'">Autenticação</clr-dg-column>
-    <clr-dg-column [clrDgField]="'account'">Conta</clr-dg-column>
-    <clr-dg-column [clrDgField]="'cnpj'">CNPJ</clr-dg-column>
+<div *ngIf="resources && resources.length > 0">
+    <clr-datagrid class="datagrid-compact">
+        <clr-dg-column [clrDgField]="'recipient'">Beneficiário</clr-dg-column>
+        <clr-dg-column [clrDgField]="'dueDate'">Dt. Vencimento</clr-dg-column>
+        <clr-dg-column [clrDgField]="'amount'">Valor</clr-dg-column>
+        <clr-dg-column [clrDgField]="'payDate'">Dt. Pagamento</clr-dg-column>
+        <clr-dg-column [clrDgField]="'payAmount'">Valor Pago</clr-dg-column>
+        <clr-dg-column [clrDgField]="'auth'">Autenticação</clr-dg-column>
+        <clr-dg-column [clrDgField]="'account'">Conta</clr-dg-column>
+        <clr-dg-column [clrDgField]="'cnpj'">CNPJ</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let resource of resources">
-        <clr-dg-cell>{{resource.recipient}}</clr-dg-cell>
-        <clr-dg-cell>{{resource.dueDate | date:'dd/MM/yyyy'}}</clr-dg-cell>
-        <clr-dg-cell>{{resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
-        <clr-dg-cell>{{resource.payDate | date:'dd/MM/yyyy' }}</clr-dg-cell>
-        
-        <clr-dg-cell>{{resource.payAmount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
-        <clr-dg-cell>{{resource.auth}}</clr-dg-cell>
-        <clr-dg-cell>{{resource.account | account }}</clr-dg-cell>
-        <clr-dg-cell>{{resource.cnpj | cnpj }}</clr-dg-cell>
-    </clr-dg-row>
+        <clr-dg-row *clrDgItems="let resource of resources">
+            <clr-dg-cell>{{resource.recipient}}</clr-dg-cell>
+            <clr-dg-cell>{{resource.dueDate | date:'dd/MM/yyyy'}}</clr-dg-cell>
+            <clr-dg-cell>{{resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
+            <clr-dg-cell>{{resource.payDate | date:'dd/MM/yyyy' }}</clr-dg-cell>
+            <clr-dg-cell>{{resource.payAmount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
+            <clr-dg-cell>{{resource.auth}}</clr-dg-cell>
+            <clr-dg-cell>{{resource.account | account }}</clr-dg-cell>
+            <clr-dg-cell>{{resource.cnpj | cnpj }}</clr-dg-cell>
+        </clr-dg-row>
 
-    <clr-dg-footer>
-        <button class="btn btn-sm btn-outline">
-            ADICIONAR
-        </button>        
-        <clr-dg-pagination #pagination [clrDgPageSize]="15">
-                <clr-dg-page-size [clrPageSizeOptions]="[15,30,50,100]">Pagamentos por página</clr-dg-page-size>
-                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-            de {{pagination.totalItems}} pagamentos
-        </clr-dg-pagination>
-    </clr-dg-footer>
-</clr-datagrid>
+        <clr-dg-footer>
+            <a class="btn btn-sm btn-link add-button" routerLink="new">
+                ADICIONAR
+            </a>        
+            <clr-dg-pagination #pagination [clrDgPageSize]="15">
+                    <clr-dg-page-size [clrPageSizeOptions]="[15,30,50,100]">Itens por página</clr-dg-page-size>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                de {{pagination.totalItems}} pagamentos
+            </clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>
+</div>

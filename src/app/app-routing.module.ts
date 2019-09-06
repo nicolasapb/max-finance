@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(mod => mod.DashboardModule),
     data: [
       {
-        path: '/finances/payments',
+        path: '/finances/payments/new',
         title: 'Novo pagamento',
         icon: 'plus'
       },
