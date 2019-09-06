@@ -8,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PageHeaderComponent  {
 
   @Input() pageTitle: string;
-  @Input() spinner = true;
-  @Input() spinnerCondition: boolean;
+  @Input() spinner = false;
+  @Input() spinnerCondition?: boolean;
   constructor() { }
 
 }

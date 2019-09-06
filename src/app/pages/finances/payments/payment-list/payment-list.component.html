@@ -5,6 +5,11 @@
 </app-page-header>
 
 <div *ngIf="resources && resources.length > 0">
+
+    <a class="btn btn-sm" routerLink="new">
+        ADICIONAR
+    </a>            
+
     <clr-datagrid class="datagrid-compact">
         <clr-dg-column [clrDgField]="'recipient'">Beneficiário</clr-dg-column>
         <clr-dg-column [clrDgField]="'dueDate'">Dt. Vencimento</clr-dg-column>
@@ -14,6 +19,8 @@
         <clr-dg-column [clrDgField]="'auth'">Autenticação</clr-dg-column>
         <clr-dg-column [clrDgField]="'account'">Conta</clr-dg-column>
         <clr-dg-column [clrDgField]="'cnpj'">CNPJ</clr-dg-column>
+        
+        <clr-dg-placeholder>Nenhum pagamento encontrado</clr-dg-placeholder>
 
         <clr-dg-row *clrDgItems="let resource of resources">
             <clr-dg-cell>{{resource.recipient}}</clr-dg-cell>
@@ -27,9 +34,6 @@
         </clr-dg-row>
 
         <clr-dg-footer>
-            <a class="btn btn-sm btn-link add-button" routerLink="new">
-                ADICIONAR
-            </a>        
             <clr-dg-pagination #pagination [clrDgPageSize]="15">
                     <clr-dg-page-size [clrPageSizeOptions]="[15,30,50,100]">Itens por página</clr-dg-page-size>
                     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}

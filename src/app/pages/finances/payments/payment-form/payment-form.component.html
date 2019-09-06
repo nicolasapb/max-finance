@@ -1,1 +1,5 @@
-<p>payment-form works!</p>
+<app-page-header
+  [pageTitle]="pageTitle"
+  [spinner]="true"
+  [spinnerCondition]="!resource.id && currencAction === 'edit'">
+</app-page-header>

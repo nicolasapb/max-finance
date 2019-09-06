@@ -81,7 +81,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   // PROTECTED METHODS
 
   protected setCurrentaction(): void {
-    this.route.snapshot.url[0].path === 'new' ? this.currencAction = 'new' : this.currencAction = 'edit';
+    const i = this.route.snapshot.url.length - 1;
+    this.route.snapshot.url[i].path === 'new' ? this.currencAction = 'new' : this.currencAction = 'edit';
   }
 
   protected loadResource(): void {
