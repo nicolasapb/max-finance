@@ -10,7 +10,7 @@ import { SimulationsModule } from './simulations/simulations.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    // CommonModule,
     FinancesRoutingModule,
     PaymentsModule,
     SavingsModule,

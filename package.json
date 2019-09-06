@@ -23,6 +23,7 @@
     "@clr/icons": "2.1.2",
     "@clr/ui": "2.1.2",
     "@webcomponents/custom-elements": "^1.0.0",
+    "angular-imask": "^5.2.1",
     "angular-in-memory-web-api": "^0.9.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
