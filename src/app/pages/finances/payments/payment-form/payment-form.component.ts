@@ -3,7 +3,7 @@ import { BaseResourceFormComponent } from 'src/app/shared/components/base-resour
 import { Payment } from '../shared/payment.model';
 import { PaymentService } from '../shared/payment.service';
 import { Validators } from '@angular/forms';
-import { tap } from 'rxjs/operators';
+import { stringDateValidator } from 'src/app/shared/validators/string-date.validator';
 
 @Component({
   selector: 'app-payment-form',
@@ -37,9 +37,9 @@ export class PaymentFormComponent extends BaseResourceFormComponent<Payment> imp
     this.resourceForm = this.formBuilder.group({
       id: [null],
       recipient: [null, [Validators.required, Validators.minLength(2)]],
-      dueDate: [null, [Validators.required]],
+      dueDate: [null, [Validators.required, stringDateValidator]],
       amount: [null, [Validators.required]],
-      payDate: [null, [Validators.required]],
+      payDate: [null, [Validators.required, stringDateValidator]],
       payAmount: [null, [Validators.required]],
       auth: [null, [Validators.required, Validators.minLength(22), Validators.maxLength(25)]],
       account: [null, [Validators.required, Validators.minLength(14), Validators.maxLength(15)]],

@@ -74,7 +74,7 @@ export class InMemoryDatabase implements InMemoryDbService {
             { id: 14, recipient: 'MAXCASA XXVII EMP IMOB LTDA', dueDate: new Date(2019, 8, 15).toLocaleDateString(),
               amount: '2545.25', payDate: new Date(2019, 8, 13).toLocaleDateString(),
               payAmount: '2545.25', auth: 'MBB350831FBD985D4FCE3F',
-              account: '03500000207601', cnpj: '13070428000152', paid: true, type: '1'  } as Payment
+              account: '03500000207601', cnpj: '13070428000152', paid: false, type: '1'  } as Payment
         ];
 
         return {

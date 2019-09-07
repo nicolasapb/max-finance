@@ -13,10 +13,11 @@ import { AccountPipe } from './pipes/account.pipe';
 import { ClarityModule } from '@clr/angular';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
+import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 
 
 @NgModule({
-  declarations: [CnpjPipe, AccountPipe, PageHeaderComponent, DateFilterComponent],
+  declarations: [CnpjPipe, AccountPipe, PageHeaderComponent, DateFilterComponent, FormFieldErrorComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -38,7 +39,8 @@ import { DateFilterComponent } from './components/date-filter/date-filter.compon
     CnpjPipe,
     AccountPipe,
     PageHeaderComponent,
-    DateFilterComponent
+    DateFilterComponent,
+    FormFieldErrorComponent
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt'}]
 })

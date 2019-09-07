@@ -1,98 +1,109 @@
-<app-page-header
-  [pageTitle]="pageTitle"
-  [spinner]="true"
-  [spinnerCondition]="!resource.id && currencAction === 'edit'">
+<app-page-header [pageTitle]="pageTitle" [spinner]="true" [spinnerCondition]="currencAction === 'edit' && !resource.id">
 </app-page-header>
 
-<form clrForm [formGroup]="resourceForm"> 
+<form clrForm [formGroup]="resourceForm" clrLayout="horizontal" (submit)="submitForm()">
+
+  <!-- paid -->
+    <div class="btn-group">
+        <button type="button" 
+           (click)="resourceForm.get('paid').setValue(true)" 
+           [class.btn-primary]="resourceForm.get('paid').value == true" 
+           class="btn ">Pago</button>
+        <button type="button" 
+           (click)="resourceForm.get('paid').setValue(false)" 
+           [class.btn-primary]="resourceForm.get('paid').value == false" 
+           class="btn">Pendente</button>
+    </div>
+
+  <!-- type -->
+  <clr-select-container>
+    <label>Tipo</label>
+    <select clrSelect name="types" formControlName="type">
+      <option *ngFor="let type of types" [value]="type.value">{{type.text}}</option>
+    </select>
+    <clr-control-helper>Tipo do pagamento efetuado</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-select-container>
 
   <!-- recipient -->
-    <clr-input-container>
-        <label for="recipient">Beneficiário</label>
-        <input clrInput 
-          formControlName="recipient"
-          id="recipient"  
-          type="text"/>
-        <clr-control-helper>Nome do Beneficiário do pagamento</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-input-container>
+  <clr-input-container>
+    <label for="recipient">Beneficiário</label>
+    <input class="w-50" clrInput formControlName="recipient" id="recipient" type="text" />
+    <clr-control-helper>Nome do Beneficiário do pagamento</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+    <clr-control-error *clrIfError="minlength">deve ter no mínimo 2 caracteres!</clr-control-error>
+  </clr-input-container>
 
-    <!-- dueDate -->
-    <clr-date-container>
-        <label for="dueDate">Dt. Vencimento</label>
-        <input clrDate 
-          formControlName="dueDate"
-          id="dueDate" 
-          type="date"
-          placeholder="dd/mm/aaaa"/>
-        <clr-control-helper>Data de vencimento</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-date-container>
+  <!-- dueDate -->
+  <clr-date-container>
+    <label for="dueDate">Dt. Vencimento</label>
+    <input clrDate formControlName="dueDate" id="dueDate" type="date" [imask]="dateMask" placeholder="dd/mm/aaaa" />
+    <clr-control-helper>Data de vencimento</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-date-container>
 
-    <!-- amount -->
-    <clr-input-container>
-        <label for="amount">Valor</label>
-        <input clrInput 
-          formControlName="amount" 
-          id="amount"   
-          [imask]="imaskAmountConfig" 
-          [unmask]="true" 
-          placeholder="R$"/>
-        <clr-control-helper >Valor cobrado</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-input-container>
+  <!-- amount -->
+  <clr-input-container>
+    <label for="amount">Valor</label>
+    <input clrInput formControlName="amount" id="amount" [imask]="imaskAmountConfig" [unmask]="true" placeholder="R$" />
+    <clr-control-helper>Valor cobrado</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-input-container>
 
-    <!-- payDate -->
-    <clr-date-container>
-        <label for="payDate">Dt. Pagamento</label>
-        <input clrDate 
-          formControlName="payDate"
-          id="payDate" 
-          type="date"
-          [imask]="dateMask" 
-          placeholder="dd/mm/aaaa"/>
-        <clr-control-helper>Data de pagamento</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-date-container>
+  <!-- payDate -->
+  <clr-date-container>
+    <label for="payDate">Dt. Pagamento</label>
+    <input clrDate formControlName="payDate" id="payDate" type="date" [imask]="dateMask" placeholder="dd/mm/aaaa" />
+    <clr-control-helper>Data de pagamento</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-date-container>
 
-    <!-- payAmount -->
-    <clr-input-container>
-        <label for="payAmount">Valor Pago</label>
-        <input clrInput 
-          formControlName="payAmount" 
-          id="payAmount"   
-          [imask]="imaskAmountConfig" 
-          [unmask]="true" 
-          placeholder="R$"/>
-        <clr-control-helper >Valor que foi pago</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-input-container>
+  <!-- payAmount -->
+  <clr-input-container>
+    <label for="payAmount">Valor Pago</label>
+    <input clrInput formControlName="payAmount" id="payAmount" [imask]="imaskAmountConfig" [unmask]="true"
+      placeholder="R$" />
+    <clr-control-helper>Valor que foi pago</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-input-container>
+
+  <!-- auth -->
+  <clr-input-container>
+    <label for="auth">Autenticação</label>
+    <input clrInput formControlName="auth" id="auth" type="text" />
+    <clr-control-helper>Código de autenticação gerado</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+    <clr-control-error *clrIfError="minlength">tamanho inválido</clr-control-error>
+  </clr-input-container>
 
   <!-- account -->
-    <clr-input-container>
-        <label for="account">Conta</label>
-        <input clrInput 
-          formControlName="account"
-          [imask]="imaskAccount" 
-          [unmask]="true"  
-          id="account"  
-          type="text"/>
-        <clr-control-helper>Conta do beneficiário</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-input-container>
-    
-  <!-- cnpj -->
-    <clr-input-container>
-        <label for="recipient">CNPJ</label>
-        <input clrInput 
-          formControlName="cnpj"
-          id="cnpj"  
-          [imask]="imaskCNPJ" 
-          [unmask]="true"   
-          type="text"/>
-        <clr-control-helper>CNPJ do beneficiário</clr-control-helper>
-        <clr-control-error>Error message that appears after focus is lost and control is invalid</clr-control-error>
-    </clr-input-container>    
+  <clr-input-container>
+    <label for="account">Conta</label>
+    <input clrInput formControlName="account" [imask]="imaskAccount" [unmask]="true" id="account" type="text" />
+    <clr-control-helper>Conta do beneficiário</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+    <clr-control-error *clrIfError="minlength">Conta inválida</clr-control-error>
+  </clr-input-container>
 
-    <pre>{{ resourceForm.value| json }}</pre> 
+  <!-- cnpj -->
+  <clr-input-container>
+    <label for="recipient">CNPJ</label>
+    <input clrInput formControlName="cnpj" id="cnpj" [imask]="imaskCNPJ" [unmask]="true" type="text" />
+    <clr-control-helper>CNPJ do beneficiário</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+    <clr-control-error *clrIfError="minlength">CNPJ inválido</clr-control-error>
+  </clr-input-container>
+
+  <div class="mt-2">
+
+    <button type="submit" class="btn btn-primary" [disabled]="submittingForm || resourceForm.invalid">
+      salvar
+    </button>
+    <button type="button" class="btn btn-outline" (click)="onCancel()">
+      voltar
+    </button>
+  </div>
 </form>
+<!-- <pre>
+  {{ resourceForm.value | json}}
+</pre> -->

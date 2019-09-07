@@ -70,10 +70,8 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
   }
 
   editResource(resource: T): void {
-    const p = this.route.snapshot.url.length - 1;
-    const i = this.route.snapshot.url.length - 1;
-    const parentComponentPath: string = this.route.snapshot.parent.url[p].path;
-    const baseComponentPath: string = this.route.snapshot.url[i].path;
+    const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
+    const baseComponentPath: string = this.route.snapshot.url[0].path;
     this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
       .then(
         () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'edit'])

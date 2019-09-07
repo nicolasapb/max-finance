@@ -1,11 +1,13 @@
-<div class="page-description">
-    <h2>{{pageTitle}}</h2>
-</div>
+<div class="mb-4">
+  <div class="page-description">
+      <h2>{{pageTitle}}</h2>
+  </div>
 
-<div *ngIf="spinner">
-  <div *ngIf="spinnerCondition">
-    <div class="spinner-centered">
-      <clr-spinner [clrMedium]="'true'">Loading data</clr-spinner>
+  <div *ngIf="spinner">
+    <div *ngIf="spinnerCondition">
+      <div class="spinner-centered">
+        <clr-spinner [clrMedium]="'true'">Loading data</clr-spinner>
+      </div>
     </div>
   </div>
 </div>

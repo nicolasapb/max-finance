@@ -6,6 +6,7 @@ import { BaseResourceModel } from '../../models/base-resource.model';
 import { BaseResourceService } from '../../services/base-resource.service';
 
 import { switchMap, tap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
@@ -73,6 +74,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   protected route: ActivatedRoute;
   protected router: Router;
   protected formBuilder: FormBuilder;
+  protected location: Location;
 
   constructor(
     protected injector: Injector,
@@ -82,6 +84,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   ) {
       this.route = this.injector.get(ActivatedRoute);
       this.router = this.injector.get(Router);
+      this.location = this.injector.get(Location);
       this.formBuilder = this.injector.get(FormBuilder);
   }
 
@@ -103,6 +106,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     } else {
       this.updateResource();
     }
+  }
+
+  onCancel() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   // PROTECTED METHODS
@@ -164,11 +171,11 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   }
 
   protected actionsForSuccess(resource: T): void {
-    const baseComponentPath: string = this.route.snapshot.parent.url[0].path;
-
-    this.router.navigateByUrl(baseComponentPath, {skipLocationChange: true})
+    const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
+    const baseComponentPath: string = this.route.snapshot.url[0].path;
+    this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
       .then(
-        () => this.router.navigate([baseComponentPath, resource.id, 'edit'])
+        () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'edit'])
       );
   }
 
