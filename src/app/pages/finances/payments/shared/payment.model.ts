@@ -5,9 +5,9 @@ export class Payment extends BaseResourceModel {
   constructor(
     public id?: number,
     public recipient?: string,
-    public dueDate?: Date,
+    public dueDate?: string,
     public amount?: string,
-    public payDate?: Date,
+    public payDate?: string,
     public payAmount?: string,
     public auth?: string,
     public account?: string,

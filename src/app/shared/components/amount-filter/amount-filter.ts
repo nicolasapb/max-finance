@@ -1,7 +1,6 @@
 import { ClrDatagridNumericFilterInterface } from '@clr/angular';
-import { Payment } from './payment.model';
 
-export class AmountFilter implements ClrDatagridNumericFilterInterface<Payment> {
+export class AmountFilter implements ClrDatagridNumericFilterInterface<any> {
 
   field: string;
 
@@ -9,7 +8,7 @@ export class AmountFilter implements ClrDatagridNumericFilterInterface<Payment> 
     this.field = field;
   }
 
-  accepts(item: Payment, low: number, high: number): boolean {
+  accepts(item: any, low: number, high: number): boolean {
     const value = +item[this.field];
     if (low !== null && value < low) {
       return false;

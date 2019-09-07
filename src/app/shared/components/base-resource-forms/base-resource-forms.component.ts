@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { BaseResourceService } from '../../services/base-resource.service';
 
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
@@ -20,7 +20,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     thousandsSeparator: '.',
     padFractionalZeros: true,
     normalizeZeros: true,
-    radix: ','
+    radix: ',',
+    max: 999999
   };
   public imaskPercentConfig = {
     mask: Number,
@@ -41,6 +42,32 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     radix: ',',
     min: 0,
     max: 101
+  };
+  public imaskCNPJ = {
+    mask: '00.000.000/0000-00'
+  };
+  public imaskAccount = {
+    mask: '0000/0000000000'
+  };
+  public dateMask = {
+    mask: Date,
+    pattern: 'd/`m/`Y',
+    format: (date) =>  {
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      const year = date.getFullYear();
+
+      if (day < 10) { day = '0' + day; }
+      if (month < 10) { month = '0' + month; }
+
+      return [day, month, year].join('/');
+    },
+    parse: (str) => {
+      const ddMMyyyy = str.split('/');
+      return new Date(ddMMyyyy[2], ddMMyyyy[1] - 1, ddMMyyyy[0]);
+    },
+    autofix: true,
+    overwrite: true
   };
 
   protected route: ActivatedRoute;

@@ -2,7 +2,8 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { BaseResourceList } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Payment } from '../shared/payment.model';
 import { PaymentService } from '../shared/payment.service';
-import { AmountFilter } from '../shared/amount-filter';
+import { AmountFilter } from 'src/app/shared/components/amount-filter/amount-filter';
+import { DateSorter } from 'src/app/shared/components/date-sorter/date-sorter';
 
 @Component({
   selector: 'app-payment-list',
@@ -11,8 +12,10 @@ import { AmountFilter } from '../shared/amount-filter';
 })
 export class PaymentListComponent extends BaseResourceList<Payment> {
 
-  payAmountFilter = new AmountFilter('amount');
-  amountFilter = new AmountFilter('payAmount');
+  public amountFilter = new AmountFilter('amount');
+  public payAmountFilter = new AmountFilter('payAmount');
+  public payDateSorter = new DateSorter('payDate');
+  public dueDateSorter = new DateSorter('dueDate');
 
   constructor(
     protected injector: Injector,

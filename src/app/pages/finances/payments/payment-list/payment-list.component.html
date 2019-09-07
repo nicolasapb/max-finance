@@ -6,28 +6,25 @@
 
 <div *ngIf="resources && resources.length > 0">
 
-    <a class="btn btn-sm" routerLink="new">
-        ADICIONAR
-    </a>            
-
+    <a class="btn btn-sm" routerLink="new">adicionar</a>    
     <clr-datagrid class="" >
         <clr-dg-column [clrDgField]="'recipient'">
             <ng-container *clrDgHideableColumn="{hidden: false}">
                 Beneficiário
             </ng-container>
         </clr-dg-column>
-        <clr-dg-column [clrDgField]="'dueDate'">
+        <clr-dg-column [clrDgField]="'dueDate'" [clrDgSortBy]="dueDateSorter">
             <ng-container *clrDgHideableColumn="{hidden: true}">
                 Dt. Vencimento
             </ng-container>
-            
         </clr-dg-column>
-        <clr-dg-column [clrDgField]="'amount'">
+        <clr-dg-column [clrDgField]="'amount'" >
             <ng-container *clrDgHideableColumn="{hidden: true}">
                 Valor
             </ng-container>
+            <!-- <clr-dg-numeric-filter [clrDgNumericFilter]="amountFilter"></clr-dg-numeric-filter> -->
         </clr-dg-column>
-        <clr-dg-column [clrDgField]="'payDate'">
+        <clr-dg-column [clrDgField]="'payDate'" [clrDgSortBy]="payDateSorter">
             <ng-container *clrDgHideableColumn="{hidden: false}">
                 Dt. Pagamento
             </ng-container>           
@@ -62,9 +59,9 @@
                 <button class="action-item" (click)="deleteResource(resource)">Delete</button>
             </clr-dg-action-overflow>            
             <clr-dg-cell>{{resource.recipient}}</clr-dg-cell>
-            <clr-dg-cell>{{resource.dueDate | date:'dd/MM/yyyy'}}</clr-dg-cell>
+            <clr-dg-cell>{{resource.dueDate }}</clr-dg-cell>
             <clr-dg-cell>{{+resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
-            <clr-dg-cell>{{resource.payDate | date:'dd/MM/yyyy' }}</clr-dg-cell>
+            <clr-dg-cell>{{resource.payDate }}</clr-dg-cell>
             <clr-dg-cell>{{+resource.payAmount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
             <clr-dg-cell>{{resource.auth}}</clr-dg-cell>
             <clr-dg-cell>{{resource.account | account }}</clr-dg-cell>
