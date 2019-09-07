@@ -1,7 +1,8 @@
-import { OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { OnInit, ViewChild, AfterViewInit, Injector } from '@angular/core';
 
 import { BaseResourceService } from '../../services/base-resource.service';
 import { BaseResourceModel } from '../../models/base-resource.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export abstract class BaseResourceList<T extends BaseResourceModel> implements OnInit {
 
@@ -35,7 +36,16 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
     max: 101
   };
 
-  constructor(protected resourceService: BaseResourceService<T>) { }
+  protected route: ActivatedRoute;
+  protected router: Router;
+
+  constructor(
+    protected injector: Injector,
+    protected resourceService: BaseResourceService<T>
+  ) {
+    this.route = this.injector.get(ActivatedRoute);
+    this.router = this.injector.get(Router);
+  }
 
   ngOnInit() {
     this.resourceService.getAll()
@@ -57,6 +67,17 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
         },
         error: error => this.actionsForError(`erro ao deletar o item: ${resource.id}`, error)
       });
+  }
+
+  editResource(resource: T): void {
+    const p = this.route.snapshot.url.length - 1;
+    const i = this.route.snapshot.url.length - 1;
+    const parentComponentPath: string = this.route.snapshot.parent.url[p].path;
+    const baseComponentPath: string = this.route.snapshot.url[i].path;
+    this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
+      .then(
+        () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'edit'])
+      );
   }
 
   protected actionsForSuccess(message: string): void {

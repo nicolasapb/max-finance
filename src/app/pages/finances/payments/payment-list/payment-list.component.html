@@ -10,32 +10,70 @@
         ADICIONAR
     </a>            
 
-    <clr-datagrid class="datagrid-compact">
-        <clr-dg-column [clrDgField]="'recipient'">Beneficiário</clr-dg-column>
-        <clr-dg-column [clrDgField]="'dueDate'">Dt. Vencimento</clr-dg-column>
-        <clr-dg-column [clrDgField]="'amount'">Valor</clr-dg-column>
-        <clr-dg-column [clrDgField]="'payDate'">Dt. Pagamento</clr-dg-column>
-        <clr-dg-column [clrDgField]="'payAmount'">Valor Pago</clr-dg-column>
-        <clr-dg-column [clrDgField]="'auth'">Autenticação</clr-dg-column>
-        <clr-dg-column [clrDgField]="'account'">Conta</clr-dg-column>
-        <clr-dg-column [clrDgField]="'cnpj'">CNPJ</clr-dg-column>
+    <clr-datagrid class="" >
+        <clr-dg-column [clrDgField]="'recipient'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
+                Beneficiário
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'dueDate'">
+            <ng-container *clrDgHideableColumn="{hidden: true}">
+                Dt. Vencimento
+            </ng-container>
+            
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'amount'">
+            <ng-container *clrDgHideableColumn="{hidden: true}">
+                Valor
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'payDate'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
+                Dt. Pagamento
+            </ng-container>           
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'payAmount'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
+                Valor Pago
+            </ng-container>
+            <clr-dg-numeric-filter [clrDgNumericFilter]="payAmountFilter"></clr-dg-numeric-filter>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'auth'">
+            <ng-container *clrDgHideableColumn="{hidden: true}">
+                Autenticação
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'account'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
+                Conta
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'cnpj'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
+                CNPJ
+            </ng-container>
+        </clr-dg-column>
         
         <clr-dg-placeholder>Nenhum pagamento encontrado</clr-dg-placeholder>
 
-        <clr-dg-row *clrDgItems="let resource of resources">
+        <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
+            <clr-dg-action-overflow>
+                <button class="action-item" (click)="editResource(resource)">Edit</button>
+                <button class="action-item" (click)="deleteResource(resource)">Delete</button>
+            </clr-dg-action-overflow>            
             <clr-dg-cell>{{resource.recipient}}</clr-dg-cell>
             <clr-dg-cell>{{resource.dueDate | date:'dd/MM/yyyy'}}</clr-dg-cell>
-            <clr-dg-cell>{{resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
+            <clr-dg-cell>{{+resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
             <clr-dg-cell>{{resource.payDate | date:'dd/MM/yyyy' }}</clr-dg-cell>
-            <clr-dg-cell>{{resource.payAmount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
+            <clr-dg-cell>{{+resource.payAmount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
             <clr-dg-cell>{{resource.auth}}</clr-dg-cell>
             <clr-dg-cell>{{resource.account | account }}</clr-dg-cell>
             <clr-dg-cell>{{resource.cnpj | cnpj }}</clr-dg-cell>
         </clr-dg-row>
 
         <clr-dg-footer>
-            <clr-dg-pagination #pagination [clrDgPageSize]="15">
-                    <clr-dg-page-size [clrPageSizeOptions]="[15,30,50,100]">Itens por página</clr-dg-page-size>
+            <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Itens por página</clr-dg-page-size>
                     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
                 de {{pagination.totalItems}} pagamentos
             </clr-dg-pagination>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -12,10 +12,11 @@ import { CnpjPipe } from './pipes/cnpj.pipe';
 import { AccountPipe } from './pipes/account.pipe';
 import { ClarityModule } from '@clr/angular';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { DateFilterComponent } from './components/date-filter/date-filter.component';
 
 
 @NgModule({
-  declarations: [CnpjPipe, AccountPipe, PageHeaderComponent],
+  declarations: [CnpjPipe, AccountPipe, PageHeaderComponent, DateFilterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -36,8 +37,9 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
     // Shared Pipes
     CnpjPipe,
     AccountPipe,
-    PageHeaderComponent
+    PageHeaderComponent,
+    DateFilterComponent
   ],
-  providers: []
+  providers: [{provide: LOCALE_ID, useValue: 'pt'}]
 })
 export class SharedModule { }

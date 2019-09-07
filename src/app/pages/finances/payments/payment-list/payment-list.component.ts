@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { BaseResourceList } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Payment } from '../shared/payment.model';
 import { PaymentService } from '../shared/payment.service';
+import { AmountFilter } from '../shared/amount-filter';
 
 @Component({
   selector: 'app-payment-list',
@@ -10,8 +11,14 @@ import { PaymentService } from '../shared/payment.service';
 })
 export class PaymentListComponent extends BaseResourceList<Payment> {
 
-  constructor(protected paymentService: PaymentService) {
-    super(paymentService);
+  payAmountFilter = new AmountFilter('amount');
+  amountFilter = new AmountFilter('payAmount');
+
+  constructor(
+    protected injector: Injector,
+    protected paymentService: PaymentService
+  ) {
+    super(injector, paymentService);
   }
 
 }

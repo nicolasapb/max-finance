@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ClrCommonStringsService } from '@clr/angular';
+import { ptBRLocale } from 'src/locale/ptBR.locale';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'max-fin';
+  constructor(commonStrings: ClrCommonStringsService) {
+    commonStrings.localize(ptBRLocale);
+  }
 }
