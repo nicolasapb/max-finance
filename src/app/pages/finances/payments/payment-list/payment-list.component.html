@@ -58,7 +58,10 @@
                 <button class="action-item" (click)="editResource(resource)">Edit</button>
                 <button class="action-item" (click)="deleteResource(resource)">Delete</button>
             </clr-dg-action-overflow>            
-            <clr-dg-cell>{{resource.recipient}}</clr-dg-cell>
+            <clr-dg-cell [class.fit-badge]="!resource.paid">
+                {{resource.recipient}}
+                <span class="badge badge-warning" *ngIf="!resource.paid"> <strong>!</strong></span>
+            </clr-dg-cell>
             <clr-dg-cell>{{resource.dueDate }}</clr-dg-cell>
             <clr-dg-cell>{{+resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
             <clr-dg-cell>{{resource.payDate }}</clr-dg-cell>

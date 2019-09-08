@@ -1,3 +1,7 @@
 .add-button {
   float: left;
 }
+
+.fit-badge {
+  font-size: 0.48rem;
+}
