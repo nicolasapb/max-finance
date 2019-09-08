@@ -15,9 +15,14 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 
-
 @NgModule({
-  declarations: [CnpjPipe, AccountPipe, PageHeaderComponent, DateFilterComponent, FormFieldErrorComponent],
+  declarations: [
+    CnpjPipe,
+    AccountPipe,
+    PageHeaderComponent,
+    DateFilterComponent,
+    FormFieldErrorComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -34,14 +39,13 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
     IMaskModule,
 
     // Shared Components
-
-    // Shared Pipes
     CnpjPipe,
     AccountPipe,
     PageHeaderComponent,
     DateFilterComponent,
     FormFieldErrorComponent
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt'}]
+  providers: [{provide: LOCALE_ID, useValue: 'pt'}],
+  entryComponents: []
 })
 export class SharedModule { }

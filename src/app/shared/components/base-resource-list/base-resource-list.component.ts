@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export abstract class BaseResourceList<T extends BaseResourceModel> implements OnInit {
 
-  resources: T[] = [];
+  public resources: T[] = [];
   public imaskAmountConfig = {
     mask: Number,
     scale: 2,
@@ -35,9 +35,11 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
     min: 0,
     max: 101
   };
+  public modalDeleteItemOpen = false;
 
   protected route: ActivatedRoute;
   protected router: Router;
+  protected resourceToDelete: T;
 
   constructor(
     protected injector: Injector,
@@ -58,17 +60,6 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
       });
   }
 
-  deleteResource(resource: T): void {
-    this.resourceService.delete(resource.id)
-      .subscribe({
-        next: _ => {
-          this.resources = this.resources.filter(element => element !== resource );
-          this.actionsForSuccess('item eliminado com sucesso');
-        },
-        error: error => this.actionsForError(`erro ao deletar o item: ${resource.id}`, error)
-      });
-  }
-
   editResource(resource: T): void {
     const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
     const baseComponentPath: string = this.route.snapshot.url[0].path;
@@ -76,6 +67,35 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
       .then(
         () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'edit'])
       );
+  }
+
+  onCancelModal(): void {
+    this.modalDeleteItemOpen = false;
+  }
+
+  onAcceptModal(): void {
+    this.modalDeleteItemOpen = false;
+    this.deleteResource(this.resourceToDelete);
+  }
+
+  confirmToDelete(resource: T): void {
+    this.modalDeleteItemOpen = true;
+    this.resourceToDelete = resource;
+  }
+
+  deleteResource(resource: T): void {
+    this.resourceService.delete(resource.id)
+      .subscribe({
+        next: _ => {
+          this.resources = this.resources.filter(element => element !== resource );
+          this.actionsForSuccess('item eliminado com sucesso');
+          this.resourceToDelete = undefined;
+        },
+        error: error => {
+          this.actionsForError(`erro ao deletar o item: ${resource.id}`, error); 
+          this.resourceToDelete = undefined;
+        }
+      });
   }
 
   protected actionsForSuccess(message: string): void {

@@ -56,7 +56,7 @@
         <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
             <clr-dg-action-overflow>
                 <button class="action-item" (click)="editResource(resource)">Edit</button>
-                <button class="action-item" (click)="deleteResource(resource)">Delete</button>
+                <button class="action-item" (click)="confirmToDelete(resource)">Delete</button>
             </clr-dg-action-overflow>            
             <clr-dg-cell [class.fit-badge]="!resource.paid">
                 {{resource.recipient}}
@@ -80,3 +80,14 @@
         </clr-dg-footer>
     </clr-datagrid>
 </div>
+
+<clr-modal [(clrModalOpen)]="modalDeleteItemOpen" [clrModalStaticBackdrop]="false">
+    <h3 class="modal-title">Confirma a exclusão do item?</h3>
+    <div class="modal-body">
+        <p>Esta operação não pode ser desfeita</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onCancelModal()">cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="onAcceptModal()">aceitar</button>
+    </div>
+</clr-modal>

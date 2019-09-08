@@ -5,3 +5,7 @@
 .fit-badge {
   font-size: 0.48rem;
 }
+
+.datagrid-action-overflow { 
+  display: none;
+}
