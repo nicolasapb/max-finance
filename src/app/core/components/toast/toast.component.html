@@ -1,0 +1,13 @@
+<div class="toast"
+     [@fadeAnimation]="{value: animationState, params:
+        { fadeIn: toastConfig.animation.fadeIn, fadeOut: toastConfig.animation.fadeOut }}"
+     (@fadeAnimation.done)="onFadeFinished($event)">
+  
+  <clr-alert [clrAlertType]="iconType" (clrAlertClosedChange)="close()">
+     <clr-alert-item>
+        <span class="alert-text">
+            {{ data.text }}
+         </span>
+      </clr-alert-item>
+   </clr-alert>
+</div>

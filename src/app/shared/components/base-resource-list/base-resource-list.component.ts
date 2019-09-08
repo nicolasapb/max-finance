@@ -3,6 +3,8 @@ import { OnInit, ViewChild, AfterViewInit, Injector } from '@angular/core';
 import { BaseResourceService } from '../../services/base-resource.service';
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from 'src/app/core/components/toast/toast.service';
+import { ToastType } from 'src/app/core/components/toast/toast-config';
 
 export abstract class BaseResourceList<T extends BaseResourceModel> implements OnInit {
 
@@ -40,6 +42,7 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
   protected route: ActivatedRoute;
   protected router: Router;
   protected resourceToDelete: T;
+  protected toastService: ToastService;
 
   constructor(
     protected injector: Injector,
@@ -47,6 +50,7 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
   ) {
     this.route = this.injector.get(ActivatedRoute);
     this.router = this.injector.get(Router);
+    this.toastService = this.injector.get(ToastService);
   }
 
   ngOnInit() {
@@ -98,13 +102,16 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
       });
   }
 
+  protected showToast(text: string, type: ToastType): void {
+    this.toastService.show({ text, type});
+  }
+
   protected actionsForSuccess(message: string): void {
-    alert(message);
-    // this.ngOnInit();
+    this.showToast(message, 'success');
   }
 
   protected actionsForError(message: string, error: any): void {
-    alert(message);
+    this.showToast(message, 'danger');
     console.error(error);
   }
 

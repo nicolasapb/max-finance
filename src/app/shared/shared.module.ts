@@ -21,7 +21,7 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
     AccountPipe,
     PageHeaderComponent,
     DateFilterComponent,
-    FormFieldErrorComponent,
+    FormFieldErrorComponent
   ],
   imports: [
     CommonModule,

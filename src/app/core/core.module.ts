@@ -9,6 +9,7 @@ import { LayoutModule } from './ui/layout/layout.module';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDatabase } from './db/in-memory-database';
+import { ToastModule } from './components/toast/toast.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -20,6 +21,7 @@ import { InMemoryDatabase } from './db/in-memory-database';
     LayoutModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase, {delay: 100}),
+    ToastModule.forRoot(),
   ],
   exports: [
     // modules
@@ -28,9 +30,11 @@ import { InMemoryDatabase } from './db/in-memory-database';
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
+    ToastModule,
 
     // components
-    HomeComponent
-  ]
+    HomeComponent,
+  ],
+  entryComponents: []
 })
 export class CoreModule { }

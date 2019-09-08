@@ -1,0 +1,15 @@
+.toast {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  /* margin-top: 85px; */
+  margin-bottom: 0.25rem;
+  /* padding: 10px 15px 10px 48px;  */
+  /* width: 135rem; */
+  /* background: #fff; */
+  /* border-width: 1px;
+  border-style: solid;
+  border-color: #dddddd #d6d6d6 #cfcfcf; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.11);
+  white-space: nowrap;
+}

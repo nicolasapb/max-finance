@@ -1,4 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
+
 import { BaseResourceList } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Payment } from '../shared/payment.model';
 import { PaymentService } from '../shared/payment.service';
@@ -19,7 +20,7 @@ export class PaymentListComponent extends BaseResourceList<Payment> {
 
   constructor(
     protected injector: Injector,
-    protected paymentService: PaymentService
+    protected paymentService: PaymentService,
   ) {
     super(injector, paymentService);
   }
