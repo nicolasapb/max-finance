@@ -55,8 +55,9 @@
 
         <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
             <clr-dg-action-overflow>
-                <button class="action-item" (click)="editResource(resource)">Edit</button>
-                <button class="action-item" (click)="confirmToDelete(resource)">Delete</button>
+                <button class="action-item" (click)="showResource(resource)">Exibir</button>
+                <button class="action-item" (click)="editResource(resource)">Editar</button>
+                <button class="action-item" (click)="confirmToDelete(resource)">Deletar</button>
             </clr-dg-action-overflow>            
             <clr-dg-cell [class.fit-badge]="!resource.paid">
                 {{resource.recipient}}

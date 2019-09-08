@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'payments/:id/edit',
     component: PaymentFormComponent
+  },
+  {
+    path: 'payments/:id/show',
+    component: PaymentFormComponent
   }
 ];
 

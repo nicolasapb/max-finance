@@ -7,6 +7,8 @@ import { BaseResourceService } from '../../services/base-resource.service';
 
 import { switchMap, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { ToastService } from 'src/app/core/components/toast/toast.service';
+import { ToastType } from 'src/app/core/components/toast/toast-config';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
@@ -75,6 +77,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   protected router: Router;
   protected formBuilder: FormBuilder;
   protected location: Location;
+  protected toastService: ToastService;
 
   constructor(
     protected injector: Injector,
@@ -86,6 +89,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
       this.router = this.injector.get(Router);
       this.location = this.injector.get(Location);
       this.formBuilder = this.injector.get(FormBuilder);
+      this.toastService = this.injector.get(ToastService);
   }
 
   ngOnInit() {
@@ -96,6 +100,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   ngAfterContentChecked(): void {
     this.setPageTitle();
+    if (this.currencAction === 'show') {
+      this.submittingForm = true;
+    }
   }
 
   submitForm() {
@@ -116,11 +123,25 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   protected setCurrentaction(): void {
     const i = this.route.snapshot.url.length - 1;
-    this.route.snapshot.url[i].path === 'new' ? this.currencAction = 'new' : this.currencAction = 'edit';
+    switch (this.route.snapshot.url[i].path) {
+      case 'new':
+        this.currencAction = 'new';
+        break;
+      case 'edit':
+        this.currencAction = 'edit';
+        break;
+      case 'show':
+        this.currencAction = 'show';
+        break;
+      default:
+        this.currencAction = 'edit';
+        break;
+    }
+    // this.route.snapshot.url[i].path === 'new' ? this.currencAction = 'new' : this.currencAction = 'edit';
   }
 
   protected loadResource(): void {
-    if (this.currencAction === 'edit') {
+    if (this.currencAction === 'edit' || this.currencAction === 'show') {
       this.route.paramMap
         .pipe(
           switchMap(params => this.resourceService.getById(+params.get('id')))
@@ -130,7 +151,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
             this.resource = resource;
             this.resourceForm.patchValue(this.resource);
           },
-          error: _ => alert('Ocorreu um erro no servidor')
+          error: _ => this.showToast('Ocorreu um erro no servidor', 'danger')
         });
     }
   }
@@ -155,7 +176,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
     this.resourceService.create(resource)
       .subscribe({
-        next: newResource => this.actionsForSuccess(newResource),
+        next: newResource => this.actionsForSuccess(newResource, 'Item criado com sucesso'),
         error: error => this.actionsForError(error)
       });
   }
@@ -165,28 +186,33 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     this.resourceService.update(resource)
       .subscribe({
-        next: newResource => this.actionsForSuccess(newResource),
+        next: newResource => this.actionsForSuccess(newResource, 'Item atualizado com sucesso'),
         error: error => this.actionsForError(error)
       });
   }
 
-  protected actionsForSuccess(resource: T): void {
+  protected actionsForSuccess(resource: T, message: string): void {
+    this.showToast(message, 'success');
     const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
     const baseComponentPath: string = this.route.snapshot.url[0].path;
     this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
       .then(
-        () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'edit'])
+        () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'show'])
       );
   }
 
   protected actionsForError(error: any): void {
     this.submittingForm = false;
-
+    this.showToast('Algo deu errado', 'danger');
     if (error.stauts === 422) {
       this.serverErrorMessages = JSON.parse(error._body).errors;
     } else {
       this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor, tente  mais tarde'];
     }
+  }
+
+  protected showToast(text: string, type: ToastType): void {
+    this.toastService.show({ text, type});
   }
 
   protected abstract buildResourceForm(): void;

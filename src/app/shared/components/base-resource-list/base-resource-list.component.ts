@@ -73,6 +73,15 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
       );
   }
 
+  showResource(resource: T): void {
+    const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
+    const baseComponentPath: string = this.route.snapshot.url[0].path;
+    this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
+      .then(
+        () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'show'])
+      );
+  }
+
   onCancelModal(): void {
     this.modalDeleteItemOpen = false;
   }
@@ -96,7 +105,7 @@ export abstract class BaseResourceList<T extends BaseResourceModel> implements O
           this.resourceToDelete = undefined;
         },
         error: error => {
-          this.actionsForError(`erro ao deletar o item: ${resource.id}`, error); 
+          this.actionsForError(`erro ao deletar o item: ${resource.id}`, error);
           this.resourceToDelete = undefined;
         }
       });
