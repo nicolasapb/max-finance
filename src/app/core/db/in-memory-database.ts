@@ -1,5 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Payment } from 'src/app/pages/finances/payments/shared/payment.model';
+import { Saving } from 'src/app/pages/finances/savings/shared/saving.model';
 
 export class InMemoryDatabase implements InMemoryDbService {
 
@@ -77,8 +78,45 @@ export class InMemoryDatabase implements InMemoryDbService {
               account: '03500000207601', cnpj: '13070428000152', paid: false, type: '1'  } as Payment
         ];
 
+        const savings: Saving[] = [
+          {id: 1,  type: 'PP', amount: '5208.54', date: '01/01/2019', simulation: false } as Saving,
+          {id: 2,  type: 'PP', amount: '4000.00', date: '01/02/2019', simulation: false } as Saving,
+          {id: 3,  type: 'PP', amount: '2800.00', date: '01/03/2019', simulation: false } as Saving,
+          {id: 4,  type: 'PP', amount: '200.00', date: '01/04/2019', simulation: false } as Saving,
+          {id: 5,  type: 'PP', amount: '2000.00', date: '01/04/2019', simulation: false } as Saving,
+          {id: 6,  type: 'PP', amount: '14.92', date: '01/04/2019', simulation: false } as Saving,
+          {id: 7,  type: 'PP', amount: '-300.00', date: '01/04/2019', simulation: false } as Saving,
+          {id: 8,  type: 'PP', amount: '30.44', date: '01/05/2019', simulation: false } as Saving,
+          {id: 9,  type: 'PP', amount: '14.97', date: '01/05/2019', simulation: false } as Saving,
+          {id: 10, type: 'PP', amount: '2300.00', date: '01/05/2019', simulation: false } as Saving,
+          {id: 11, type: 'PP', amount: '16.76', date: '01/05/2019', simulation: false } as Saving,
+          {id: 12, type: 'PP', amount: '10.11', date: '01/05/2019', simulation: false } as Saving,
+          {id: 13, type: 'PP', amount: '4700.00', date: '01/06/2019', simulation: false } as Saving,
+          {id: 14, type: 'PP', amount: '15.03', date: '01/06/2019', simulation: false } as Saving,
+          {id: 15, type: 'PP', amount: '25.33', date: '01/06/2019', simulation: false } as Saving,
+          {id: 16, type: 'PP', amount: '2300.00', date: '01/06/2019', simulation: false } as Saving,
+          {id: 17, type: 'PP', amount: '20.19', date: '01/07/2019', simulation: false } as Saving,
+          {id: 18, type: 'PP', amount: '10000.00', date: '01/07/2019', simulation: false } as Saving,
+          {id: 19, type: 'PP', amount: '57.96', date: '01/07/2019', simulation: false } as Saving,
+          {id: 20, type: 'PP', amount: '1585.75', date: '01/07/2019', simulation: false } as Saving,
+          {id: 21, type: 'CAR', amount: '50000', date: '15/08/2019', simulation: false } as Saving,
+          {id: 22, type: 'CAR', amount: '50000', date: '01/01/2020', simulation: true } as Saving,
+          {id: 23, type: 'FGTS', amount: '55180.34', date: '01/08/2019', simulation: false} as Saving,
+          {id: 24, type: 'FGTS', amount: '60000.00', date: '01/01/2020', simulation: true} as Saving,
+          {id: 25, type: 'CDB', amount: '35811.54', date: '01/08/2019', simulation: false} as Saving,
+          {id: 26, type: 'CDB', amount: '36000.00', date: '01/01/2020', simulation: true} as Saving,
+          {id: 27, type: 'TES', amount: '25461.10', date: '01/08/2019', simulation: false} as Saving,
+          {id: 28, type: 'TES', amount: '25500.00', date: '01/01/2020', simulation: true} as Saving,
+          {id: 29, type: 'PREV', amount: '9300.42', date: '01/01/2020', simulation: true} as Saving,
+          {id: 30, type: 'PREV', amount: '9300.42', date: '01/01/2019', simulation: false} as Saving,
+          {id: 31, type: 'PP', amount: '20888.58', date: '01/01/2020', simulation: true} as Saving,
+          {id: 32, type: 'PPR', amount: '0', date: '20/12/2019', simulation: false} as Saving,
+          {id: 33, type: 'PPR', amount: '16000.00', date: '01/01/2020', simulation: true} as Saving
+        ];
+
         return {
-            payments
+            payments,
+            savings
         };
     }
 

@@ -1,14 +1,10 @@
 import { ClrDatagridComparatorInterface } from '@clr/angular';
 
-export class DateSorter implements ClrDatagridComparatorInterface<any> {
+export abstract class BaseDateSorter<T> implements ClrDatagridComparatorInterface<T> {
 
-    field: string;
+    constructor(protected field: string) { }
 
-    constructor(field: string) {
-      this.field = field;
-    }
-
-    compare(a: any, b: any): number {
+    compare(a: T, b: T): number {
         const dateA = this.stringToDate(a[this.field]);
         const dateB = this.stringToDate(b[this.field]);
         return dateA.getTime() - dateB.getTime();

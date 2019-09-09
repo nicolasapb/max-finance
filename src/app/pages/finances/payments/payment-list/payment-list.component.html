@@ -19,10 +19,10 @@
             </ng-container>
         </clr-dg-column>
         <clr-dg-column [clrDgField]="'amount'" >
-            <ng-container *clrDgHideableColumn="{hidden: true}">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
                 Valor
             </ng-container>
-            <!-- <clr-dg-numeric-filter [clrDgNumericFilter]="amountFilter"></clr-dg-numeric-filter> -->
+            <clr-dg-numeric-filter [clrDgNumericFilter]="amountFilter"></clr-dg-numeric-filter>
         </clr-dg-column>
         <clr-dg-column [clrDgField]="'payDate'" [clrDgSortBy]="payDateSorter">
             <ng-container *clrDgHideableColumn="{hidden: false}">
