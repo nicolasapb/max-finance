@@ -1,1 +1,53 @@
-<p>saving-form works!</p>
+<app-page-header [pageTitle]="pageTitle" [spinner]="true" [spinnerCondition]="currencAction === 'edit' && !resource.id">
+</app-page-header>
+
+<form clrForm [formGroup]="resourceForm" clrLayout="horizontal" (submit)="submitForm()">
+
+  <!-- simulation -->
+    <div class="btn-group">
+        <button type="button" 
+           (click)="resourceForm.get('simulation').setValue(false)" 
+           [class.btn-primary]="resourceForm.get('simulation').value == false" 
+           class="btn ">Real</button>
+        <button type="button" 
+           (click)="resourceForm.get('simulation').setValue(true)" 
+           [class.btn-primary]="resourceForm.get('simulation').value == true" 
+           class="btn">Previsão</button>
+    </div>
+
+  <!-- type -->
+  <clr-select-container>
+    <label>Aplicação</label>
+    <select clrSelect name="types" formControlName="type">
+      <option *ngFor="let type of types" [value]="type.value">{{type.text}}</option>
+    </select>
+    <clr-control-helper>Tipo da aplicação lançada</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-select-container>
+
+  <!-- amount -->
+  <clr-input-container>
+    <label for="amount">Valor</label>
+    <input clrInput formControlName="amount" id="amount" [imask]="imaskAmountConfig" [unmask]="true" placeholder="R$" />
+    <clr-control-helper>Valor cobrado</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-input-container>
+
+  <!-- date -->
+  <clr-date-container>
+    <label for="date">Dt. Lançamento</label>
+    <input clrDate formControlName="date" id="date" type="date" [imask]="dateMask" placeholder="dd/mm/aaaa" />
+    <clr-control-helper>Data do lançamento</clr-control-helper>
+    <clr-control-error *clrIfError="required">Campo é obrigatório!</clr-control-error>
+  </clr-date-container>
+
+  <div class="mt-2">
+
+    <button type="submit" class="btn btn-primary" [disabled]="submittingForm || resourceForm.invalid">
+      aceitar
+    </button>
+    <button type="button" class="btn btn-outline" (click)="onCancel()">
+      cancelar
+    </button>
+  </div>
+</form>
