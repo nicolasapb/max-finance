@@ -1,4 +1,4 @@
-import { OnInit, ViewChild, AfterViewInit, Injector } from '@angular/core';
+import { OnInit, ViewChild, AfterViewInit, Injector, ElementRef, Renderer2 } from '@angular/core';
 
 import { BaseResourceService } from '../../services/base-resource.service';
 import { BaseResourceModel } from '../../models/base-resource.model';
@@ -7,6 +7,8 @@ import { ToastService } from 'src/app/core/components/toast/toast.service';
 import { ToastType } from 'src/app/core/components/toast/toast-config';
 
 export abstract class BaseResourceList<T extends BaseResourceModel> implements OnInit {
+
+  // @ViewChild(HTMLElement, {static: true}) acceptDelete: any;
 
   public resources: T[] = [];
   public imaskAmountConfig = {

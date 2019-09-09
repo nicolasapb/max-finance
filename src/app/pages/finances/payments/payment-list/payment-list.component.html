@@ -54,7 +54,7 @@
         <clr-dg-placeholder>Nenhum pagamento encontrado</clr-dg-placeholder>
 
         <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
-            <clr-dg-action-overflow>
+            <clr-dg-action-overflow  [attr.aria-expanded]="!modalDeleteItemOpen">
                 <button class="action-item" (click)="showResource(resource)">Exibir</button>
                 <button class="action-item" (click)="editResource(resource)">Editar</button>
                 <button class="action-item" (click)="confirmToDelete(resource)">Deletar</button>
@@ -82,7 +82,7 @@
     </clr-datagrid>
 </div>
 
-<clr-modal [(clrModalOpen)]="modalDeleteItemOpen" [clrModalStaticBackdrop]="false">
+<clr-modal #acceptDelete [(clrModalOpen)]="modalDeleteItemOpen" [clrModalStaticBackdrop]="false">
     <h3 class="modal-title">Confirma a exclusão do item?</h3>
     <div class="modal-body">
         <p>Esta operação não pode ser desfeita</p>
