@@ -2,9 +2,7 @@ import { ClrDatagridNumericFilterInterface } from '@clr/angular';
 
 export abstract class BaseAmountFilter<T> implements ClrDatagridNumericFilterInterface<T> {
 
-  constructor(protected field: string) { 
-    console.log(this.field);
-  }
+  constructor(protected field: string) { }
 
   accepts(item: T, low: number, high: number): boolean {
     console.log(item, this.field)

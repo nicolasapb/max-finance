@@ -33,7 +33,7 @@ const routes: Routes = [
         icon: 'plus'
       },
       {
-        path: '/finances/savings',
+        path: '/finances/savings/new',
         title: 'Nova economia',
         icon: 'plus'
       }

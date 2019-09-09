@@ -14,12 +14,12 @@
             </ng-container>
         </clr-dg-column>
         <clr-dg-column [clrDgField]="'dueDate'" [clrDgSortBy]="dueDateSorter">
-            <ng-container *clrDgHideableColumn="{hidden: true}">
+            <ng-container *clrDgHideableColumn="{hidden: false}">
                 Dt. Vencimento
             </ng-container>
         </clr-dg-column>
         <clr-dg-column [clrDgField]="'amount'" >
-            <ng-container *clrDgHideableColumn="{hidden: false}">
+            <ng-container *clrDgHideableColumn="{hidden: true}">
                 Valor
             </ng-container>
             <clr-dg-numeric-filter [clrDgNumericFilter]="amountFilter"></clr-dg-numeric-filter>
