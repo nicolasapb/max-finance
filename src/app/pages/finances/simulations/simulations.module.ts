@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { SimulationsRoutingModule } from './simulations-routing.module';
 import { SimulationListComponent } from './simulation-list/simulation-list.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [SimulationListComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     SimulationsRoutingModule
   ]
 })

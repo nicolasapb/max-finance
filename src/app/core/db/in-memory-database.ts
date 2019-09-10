@@ -1,6 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Payment } from 'src/app/pages/finances/payments/shared/payment.model';
 import { Saving } from 'src/app/pages/finances/savings/shared/saving.model';
+import { Simulation } from 'src/app/pages/finances/simulations/shared/simulation.model';
 
 export class InMemoryDatabase implements InMemoryDbService {
 
@@ -114,9 +115,32 @@ export class InMemoryDatabase implements InMemoryDbService {
           {id: 33, type: 'PPR', amount: '16000.00', date: '01/01/2020', simulation: true} as Saving
         ];
 
+        const simulations: Simulation[] = [
+          {
+            id: 1,
+            composition: 'FULL',
+            total: '217689.00',
+            entry: '335689.00',
+            entryPct: '65.7700',
+            funding: '174692.00',
+            fundingPct: '34.2300',
+            renovation: '0',
+            installment: '1679.74',
+            fundFees: false,
+            composeIncome: true,
+            interest: '7.9900',
+            interestAM: '0.6400',
+            cet: '8.6000',
+            cesh: '2.4584',
+            term: '35',
+            simDate: '09/07/2019'
+          } as Simulation
+        ];
+
         return {
             payments,
-            savings
+            savings,
+            simulations
         };
     }
 

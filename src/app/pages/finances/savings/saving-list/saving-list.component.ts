@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { BaseResourceList } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { SavingService } from '../shared/saving.service';
-import { Saving } from '../shared/saving.model'; 
+import { Saving } from '../shared/saving.model';
 import { SavingDateSorter } from '../shared/saving-date-sorter';
 import { SavingAmountFilter } from '../shared/saving-amount-filter';
 
