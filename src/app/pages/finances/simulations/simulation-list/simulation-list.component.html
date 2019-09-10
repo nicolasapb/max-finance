@@ -4,13 +4,7 @@
     [spinnerCondition]="!resources">
 </app-page-header>
 
-<div>
-  <button 
-    class="btn btn-sm"
-    (click)="newSimulation()" >
-    adicionar
-  </button>    
-</div>
+<a class="btn btn-sm" routerLink="new">adicionar</a>
 
 <div class="clr-row">
 
@@ -130,8 +124,8 @@
 
             <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
                 <clr-dg-action-overflow  [attr.aria-expanded]="!modalDeleteItemOpen">
-                    <button class="action-item" (click)="showResource(resource)">Exibir</button>
-                    <button class="action-item" (click)="editResource(resource)">Editar</button>
+                    <!-- <button class="action-item" (click)="showResource(resource)">Exibir</button>
+                    <button class="action-item" (click)="editResource(resource)">Editar</button> -->
                     <button class="action-item" (click)="confirmToDelete(resource)">Deletar</button>
                 </clr-dg-action-overflow>     
 
