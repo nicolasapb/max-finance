@@ -1,12 +1,15 @@
 <app-page-header 
     pageTitle="Pagamentos"
     [spinner]="true"
-    [spinnerCondition]="!resources || resources.length == 0">
+    [spinnerCondition]="!resources">
 </app-page-header>
 
-<div *ngIf="resources && resources.length > 0" class="">
+<a class="btn btn-sm" routerLink="new">adicionar</a>    
 
-    <a class="btn btn-sm" routerLink="new">adicionar</a>    
+<h3>Pagamentos efetuados / pendentes</h3>
+
+<div *ngIf="resources" class="">
+
     <clr-datagrid class="" >
         <clr-dg-column [clrDgField]="'recipient'">
             <ng-container *clrDgHideableColumn="{hidden: false}">
@@ -51,7 +54,7 @@
             </ng-container>
         </clr-dg-column>
         
-        <clr-dg-placeholder>Nenhum pagamento encontrado</clr-dg-placeholder>
+        <clr-dg-placeholder>Nenhum economia encontrado</clr-dg-placeholder>
 
         <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
             <clr-dg-action-overflow  [attr.aria-expanded]="!modalDeleteItemOpen">

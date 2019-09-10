@@ -1,18 +1,22 @@
 <app-page-header 
-    pageTitle="Economias"
+    pageTitle="Simulações"
     [spinner]="true"
-    [spinnerCondition]="!resources || resources.length == 0">
+    [spinnerCondition]="!resources">
 </app-page-header>
 
 <div>
   <button 
     class="btn btn-sm"
     (click)="newSimulation()" >
-    nova simulação
+    adicionar
   </button>    
 </div>
 
 <div class="clr-row">
+
+  <div class="clr-col-sm-12 clr-col-md-12">
+    <h3>Totais</h3>
+  </div>  
 
   <div class="clr-col-sm-12 clr-col-md-3">
     <div class="w-100">
@@ -52,58 +56,121 @@
     </div>
   </div> 
 
-  <div class="clr-col-sm-12 clr-col-md-9 mt-3">
+  <div class="w-100 clr-col-sm-12 clr-col-md-12 mt-3">
 
-    <div *ngIf="resources && resources.length > 0" class="w-100">
+    <h3>Histórico de simulações realizadas</h3>
 
-        <!-- <clr-datagrid class="datagrid-compact" >
-            <clr-dg-column [clrDgField]="'type'">
+    <div *ngIf="resources" class="w-100">
+
+        <clr-datagrid class="" >
+
+            <clr-dg-column [clrDgField]="'composition'">
                 <ng-container *clrDgHideableColumn="{hidden: false}">
-                    Aplicação
+                    Composição
                 </ng-container>
             </clr-dg-column>
-            <clr-dg-column [clrDgField]="'amount'">
+
+            <clr-dg-column [clrDgField]="'total'">
                 <ng-container *clrDgHideableColumn="{hidden: false}">
-                    Valor
+                    Total
                 </ng-container>
                 <clr-dg-numeric-filter [clrDgNumericFilter]="amountFilter"></clr-dg-numeric-filter>
             </clr-dg-column>
-            <clr-dg-column [clrDgField]="'date'" [clrDgSortBy]="dateSorter">
+
+            <clr-dg-column [clrDgField]="'entry'">
                 <ng-container *clrDgHideableColumn="{hidden: false}">
-                    Dt. Lançamento
-                </ng-container>           
+                    Entrada
+                </ng-container>
             </clr-dg-column>
+
+            <clr-dg-column class="w-auto">
+                <ng-container *clrDgHideableColumn="{hidden: true}">
+                    %
+                </ng-container>
+            </clr-dg-column>
+
+            <clr-dg-column [clrDgField]="'funding'">
+                <ng-container *clrDgHideableColumn="{hidden: false}">
+                    Financiamento
+                </ng-container>
+            </clr-dg-column>
+
+            <clr-dg-column class="w-auto">
+                <ng-container *clrDgHideableColumn="{hidden: true}">
+                    %
+                </ng-container>
+            </clr-dg-column>
+
+            <clr-dg-column [clrDgField]="'renovation'">
+                <ng-container *clrDgHideableColumn="{hidden: false}">
+                    Reforma
+                </ng-container>
+            </clr-dg-column>
+
+            <clr-dg-column [clrDgField]="'installment'">
+                <ng-container *clrDgHideableColumn="{hidden: false}">
+                    Vl. 1a. Parcela
+                </ng-container>
+            </clr-dg-column>
+
+            <clr-dg-column [clrDgField]="'fundFees'">
+                <ng-container *clrDgHideableColumn="{hidden: true}">
+                    Financiar Taxas
+                </ng-container>
+            </clr-dg-column>
+
+            <clr-dg-column [clrDgField]="'composeIncome'">
+                <ng-container *clrDgHideableColumn="{hidden: false}">
+                    Compor Renda
+                </ng-container>
+            </clr-dg-column>
+
             
-            <clr-dg-placeholder>Nenhuma economia encontrada</clr-dg-placeholder>
+            <clr-dg-placeholder>Nenhuma simulação encontrada</clr-dg-placeholder>
 
             <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
                 <clr-dg-action-overflow  [attr.aria-expanded]="!modalDeleteItemOpen">
                     <button class="action-item" (click)="showResource(resource)">Exibir</button>
                     <button class="action-item" (click)="editResource(resource)">Editar</button>
                     <button class="action-item" (click)="confirmToDelete(resource)">Deletar</button>
-                </clr-dg-action-overflow>            
-                <clr-dg-cell>
-                    {{getTypeText(resource.type)}}
-                    <span class="label" 
-                      [class.label-light-blue]="!resource.simulation" 
-                      [class.label-orange]="resource.simulation">{{resource.simText}}</span>
-                </clr-dg-cell> 
-                <clr-dg-cell>{{+resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
-                <clr-dg-cell>{{resource.date }}</clr-dg-cell>
+                </clr-dg-action-overflow>     
+
+                <clr-dg-cell>{{ resource.composition}}</clr-dg-cell> 
+                <clr-dg-cell>{{+resource.total | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell>
+                <clr-dg-cell>{{+resource.entry | currency:'BRL':'symbol':'0.2-2':'pt'  }}</clr-dg-cell>
+                <clr-dg-cell class="w-auto">{{+resource.entryPct | number:'0.2-2':'pt' }}</clr-dg-cell>
+                <clr-dg-cell>{{+resource.funding | currency:'BRL':'symbol':'0.2-2':'pt'  }}</clr-dg-cell>
+                <clr-dg-cell class="w-auto">{{+resource.fundingPct | number:'0.2-2':'pt' }}</clr-dg-cell>
+                <clr-dg-cell>{{+resource.renovation | currency:'BRL':'symbol':'0.2-2':'pt'  }}</clr-dg-cell>
+                <clr-dg-cell>{{+resource.installment | currency:'BRL':'symbol':'0.2-2':'pt'  }}</clr-dg-cell>
+                <clr-dg-cell>{{resource.fundFeesText }}</clr-dg-cell>
+                <clr-dg-cell>{{resource.composeIncomeText }}</clr-dg-cell>
+
+                <clr-dg-row-detail *clrIfExpanded> 
+                    <p>
+                        Data da simulação: <strong>{{ resource.simDate}}</strong> 
+                        | Taxa de juros efetiva com bonificação: <strong>{{ resource.interest | number:'0.2-2':'pt'}}</strong> % a.a. <strong>{{ resource.interestAM | number:'0.2-2':'pt'}}</strong>% a.m. + TR 
+                        | Custo Efetivo Total (CET) com bonificação: <strong>{{ resource.cet | number:'0.2-2':'pt'}}</strong> % a.a. 
+                        | Custo Efetivo do Seguro Habitacional (CESH): <strong>{{ resource.cesh | number:'0.2-2':'pt'}}</strong>% 
+                        | Prazo: <strong>{{ resource.term }}</strong> anos																		
+                    </p>
+                </clr-dg-row-detail>                
+
             </clr-dg-row>
 
             <clr-dg-footer>
                 <clr-dg-pagination #pagination [clrDgPageSize]="10">
                         <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Itens por página</clr-dg-page-size>
                         {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-                    de {{pagination.totalItems}} lançamentos
+                    de {{pagination.totalItems}} simulações
                 </clr-dg-pagination>
             </clr-dg-footer>
-        </clr-datagrid> -->
+        </clr-datagrid>
     </div>
   </div>  
   
 </div>
+
 
 <clr-modal #acceptDelete [(clrModalOpen)]="modalDeleteItemOpen" [clrModalStaticBackdrop]="false">
     <h3 class="modal-title">Confirma a exclusão do item?</h3>

@@ -1,12 +1,17 @@
 <app-page-header 
     pageTitle="Economias"
     [spinner]="true"
-    [spinnerCondition]="!resources || resources.length == 0">
+    [spinnerCondition]="!resources">
 </app-page-header>
 
 <a class="btn btn-sm" routerLink="new">adicionar</a>    
 
+
 <div class="clr-row">
+
+<div class="clr-col-sm-12 clr-col-md-12">
+  <h3>Totais</h3>
+</div>
 
   <div class="clr-col-sm-12 clr-col-md-3">
     <div class="w-100">
@@ -49,7 +54,10 @@
   </div> 
 
   <div class="clr-col-sm-12 clr-col-md-9 mt-3">
-    <div *ngIf="resources && resources.length > 0" class="w-100">
+    
+    <h3>Lançamentos</h3>
+
+    <div *ngIf="resources" class="w-100">
 
         <clr-datagrid class="datagrid-compact" >
             <clr-dg-column [clrDgField]="'type'">
