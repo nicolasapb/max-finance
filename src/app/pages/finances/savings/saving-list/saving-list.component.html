@@ -4,9 +4,6 @@
     [spinnerCondition]="!resources">
 </app-page-header>
 
-<a class="btn btn-sm" routerLink="new">adicionar</a>    
-
-
 <div class="clr-row">
 
 <div class="clr-col-sm-12 clr-col-md-12">
@@ -55,7 +52,9 @@
 
   <div class="clr-col-sm-12 clr-col-md-9 mt-3">
     
-    <h3>Lançamentos</h3>
+    <div class="mb-3"><h3>Lançamentos</h3></div>
+
+    <a class="btn btn-sm" routerLink="new">adicionar</a>    
 
     <div *ngIf="resources" class="w-100">
 

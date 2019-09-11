@@ -1,1 +1,86 @@
-<p>simulation-form works!</p>
+<form clrStepper [formGroup]="resourceForm" (ngSubmit)="submit()">
+  <clr-stepper-panel formGroupName="composition">
+    <clr-step-title>Entrada</clr-step-title>
+    <clr-step-description>Composição da entrada da simulação</clr-step-description>
+    <clr-step-content *clrIfExpanded>
+
+      <div class="clr-row">
+        <div class="clr-col-sm-12 clr-col-md-3">
+          <div class="w-100">
+            <div class="card">
+              <div class="card-block">
+                <ul class="list-unstyled">
+                  <li *ngFor="let prev of totals">
+                    <p class="card-text">
+                      <clr-checkbox-wrapper>
+                        <input type="checkbox" #lol clrCheckbox (change)="" [name]="prev.type" />
+                        <label>{{prev.type}}</label>
+                      </clr-checkbox-wrapper>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clr-col-sm-12 clr-col-md-6">
+          <clr-input-container>
+            <label class="w-100">Composição</label>
+            <input class="w-100" clrInput formControlName="composition" />
+            <clr-control-error *clrIfError="'required'">First Name Required</clr-control-error>
+          </clr-input-container>
+        </div>
+
+        <div class="clr-col-sm-12 clr-col-md-3">
+          <clr-input-container>
+            <label>Total</label>
+            <input clrInput formControlName="total" />
+            <clr-control-error *clrIfError="'required'">Last Name Required</clr-control-error>
+          </clr-input-container>
+        </div>
+
+      </div>
+
+      <button clrStepButton="next">next</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+
+  <clr-stepper-panel formGroupName="installment">
+    <clr-step-title>Parcelamento</clr-step-title>
+    <clr-step-description>Valor da Primeira Parcela e opções de fincanciamento</clr-step-description>
+    <clr-step-content *clrIfExpanded>
+      <clr-input-container>
+        <label>Vl. 1a. Parcela</label>
+        <input clrInput formControlName="installment" />
+        <clr-control-error *clrIfError="'required'">First Name Required</clr-control-error>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Compor Renda</label>
+        <input clrInput formControlName="composeIncome" />
+        <clr-control-error *clrIfError="'required'">Last Name Required</clr-control-error>
+      </clr-input-container>
+      <button clrStepButton="next">next</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+
+  <clr-stepper-panel formGroupName="conditions">
+    <clr-step-title>Condições</clr-step-title>
+    <clr-step-description>Taxas e Condições do Financiamento</clr-step-description>
+    <clr-step-content *clrIfExpanded>
+      <clr-input-container>
+        <label>Taxa a.a.</label>
+        <input clrInput formControlName="interest" />
+        <clr-control-error *clrIfError="'required'">First Name Required</clr-control-error>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Prazo</label>
+        <input clrInput formControlName="term" />
+        <clr-control-error *clrIfError="'required'">Last Name Required</clr-control-error>
+      </clr-input-container>
+      <button clrStepButton="submit">submit</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+</form>

@@ -25,6 +25,7 @@ export class SimulationListComponent extends BaseResourceList<Simulation> implem
   public simulation: Simulation;
   public contractValue = 510381.00;
   public contractEntry = 118000.00;
+  public showForm = false;
 
   constructor(
     protected simulationService: SimulationService,
