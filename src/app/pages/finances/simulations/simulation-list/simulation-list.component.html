@@ -54,7 +54,12 @@
 
     <button class="btn btn-sm" (click)="showForm = !showForm">adicionar</button> 
     
-    <app-simulation-form *ngIf="showForm" [totals]="prevTotalByType"></app-simulation-form>
+    <app-simulation-form *ngIf="showForm" 
+        [totals]="prevTotalByType"
+        [contractValue]="contractValue" 
+        [contractEntry]="contractEntry"
+        [prevTotal]="prevTotal">
+    </app-simulation-form>
 
     <div *ngIf="resources" class="w-100">
 

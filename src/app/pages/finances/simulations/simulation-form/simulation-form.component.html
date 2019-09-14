@@ -4,16 +4,19 @@
     <clr-step-description>Composição da entrada da simulação</clr-step-description>
     <clr-step-content *clrIfExpanded>
 
-      <div class="clr-row">
-        <div class="clr-col-sm-12 clr-col-md-3">
+      <div class="clearfix">
+
+        <!-- options -->
+        <div class="clr-col-12 clr-col-sm-4 clr-col-md-4 clr-col-lg-3 clr-col-xl-3 float-left">
           <div class="w-100">
             <div class="card">
               <div class="card-block">
                 <ul class="list-unstyled">
-                  <li *ngFor="let prev of totals">
+                  <li *ngFor="let prev of totalsSelected">
                     <p class="card-text">
                       <clr-checkbox-wrapper>
-                        <input type="checkbox" #lol clrCheckbox (change)="" [name]="prev.type" />
+                        <input type="checkbox" #checkbox clrCheckbox (click)="onClick(checkbox.checked, prev)"
+                          [name]="prev.type" [value]="prev.amount" [checked]="prev.checked" />
                         <label>{{prev.type}}</label>
                       </clr-checkbox-wrapper>
                     </p>
@@ -24,25 +27,87 @@
           </div>
         </div>
 
-        <div class="clr-col-sm-12 clr-col-md-6">
-          <clr-input-container>
-            <label class="w-100">Composição</label>
-            <input class="w-100" clrInput formControlName="composition" />
-            <clr-control-error *clrIfError="'required'">First Name Required</clr-control-error>
-          </clr-input-container>
+        <!-- composition -->
+        <div class="clr-row">
+          <div class="clr-col-sm-12 clr-col-md-10  clr-col-lg-10">
+            <clr-input-container>
+              <label class="w-100">Composição</label>
+              <input class="w-100" clrInput formControlName="composition" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
         </div>
 
-        <div class="clr-col-sm-12 clr-col-md-3">
-          <clr-input-container>
-            <label>Total</label>
-            <input clrInput formControlName="total" />
-            <clr-control-error *clrIfError="'required'">Last Name Required</clr-control-error>
-          </clr-input-container>
+        <!-- total, entry, entryPct -->
+        <div class="clr-row">
+          <!-- total -->
+          <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-4 clr-col-xl-3">
+            <clr-input-container>
+              <label class="w-100">Total (R$)</label>
+              <input class="w-100" clrInput formControlName="total" id="total" placeholder="R$"
+                [imask]="imaskAmountConfig" [unmask]="true" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
+
+          <!-- entry -->
+          <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-4 clr-col-xl-3">
+            <clr-input-container>
+              <label class="w-100">Entrada (R$)</label>
+              <input class="w-100" clrInput formControlName="entry" id="entry" placeholder="R$"
+                [imask]="imaskAmountConfig" [unmask]="true" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
+
+          <!-- entryPct -->
+          <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+            <clr-input-container>
+              <label class="w-100" style="white-space: nowrap;">Entrada %</label>
+              <input class="w-100" clrInput formControlName="entryPct" id="entryPct" placeholder="%"
+                [imask]="imaskPercentConfig" [unmask]="true" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
+
+        </div>
+
+        <!-- funding, renovation, fundingPct -->
+        <div class="clr-row">
+          <!-- funding -->
+          <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-4 clr-col-xl-3">
+            <clr-input-container>
+              <label class="w-100">Financiamento (R$)</label>
+              <input class="w-100" clrInput formControlName="funding" id="funding" placeholder="R$"
+                [imask]="imaskAmountConfig" [unmask]="true" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
+
+          <!-- renovation -->
+          <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-4 clr-col-xl-3">
+            <clr-input-container>
+              <label class="w-100">Reforma (R$)</label>
+              <input class="w-100" clrInput formControlName="renovation" id="renovation" placeholder="R$"
+                [imask]="imaskAmountConfig" [unmask]="true" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
+
+          <!-- fundingPct -->
+          <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+            <clr-input-container>
+              <label class="w-100" style="white-space: nowrap;">Financiamento %</label>
+              <input class="w-100" clrInput formControlName="fundingPct" id="fundingPct" placeholder="%"
+                [imask]="imaskPercentConfig" [unmask]="true" />
+              <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+            </clr-input-container>
+          </div>
+
         </div>
 
       </div>
-
-      <button clrStepButton="next">next</button>
+      <button clrStepButton="next">Próximo</button>
     </clr-step-content>
   </clr-stepper-panel>
 
@@ -50,17 +115,34 @@
     <clr-step-title>Parcelamento</clr-step-title>
     <clr-step-description>Valor da Primeira Parcela e opções de fincanciamento</clr-step-description>
     <clr-step-content *clrIfExpanded>
+
+      <!-- installment -->
       <clr-input-container>
         <label>Vl. 1a. Parcela</label>
-        <input clrInput formControlName="installment" />
-        <clr-control-error *clrIfError="'required'">First Name Required</clr-control-error>
+        <input clrInput formControlName="installment" id="installment" placeholder="R$" [imask]="imaskAmountConfig"
+          [unmask]="true" />
+        <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
       </clr-input-container>
 
-      <clr-input-container>
-        <label>Compor Renda</label>
-        <input clrInput formControlName="composeIncome" />
-        <clr-control-error *clrIfError="'required'">Last Name Required</clr-control-error>
-      </clr-input-container>
+      <!-- fundFees -->
+      <div class="mt-2">
+        <clr-toggle-wrapper>
+          <input type="checkbox" clrToggle [value]="this.resourceForm.get(['installment', 'fundFees']).value"
+            name="fundFees" formControlName="fundFees" />
+          <label>Financiar Taxas</label>
+        </clr-toggle-wrapper>
+      </div>
+
+      <!-- composeIncome -->
+      <div class="mt-2">
+        <clr-toggle-wrapper>
+          <input type="checkbox" clrToggle [value]="this.resourceForm.get(['installment', 'composeIncome']).value"
+            name="composeIncome" formControlName="composeIncome" />
+          <label>Compor Renda</label>
+        </clr-toggle-wrapper>
+      </div>
+
+
       <button clrStepButton="next">next</button>
     </clr-step-content>
   </clr-stepper-panel>
@@ -69,18 +151,75 @@
     <clr-step-title>Condições</clr-step-title>
     <clr-step-description>Taxas e Condições do Financiamento</clr-step-description>
     <clr-step-content *clrIfExpanded>
-      <clr-input-container>
-        <label>Taxa a.a.</label>
-        <input clrInput formControlName="interest" />
-        <clr-control-error *clrIfError="'required'">First Name Required</clr-control-error>
-      </clr-input-container>
 
-      <clr-input-container>
-        <label>Prazo</label>
-        <input clrInput formControlName="term" />
-        <clr-control-error *clrIfError="'required'">Last Name Required</clr-control-error>
-      </clr-input-container>
+      <div class="clr-row">
+
+        <!-- simDate -->
+        <clr-date-container>
+          <label for="simDate">Data da simulação</label>
+          <input clrDate formControlName="simDate" id="simDate" type="date" [imask]="dateMask"
+            placeholder="dd/mm/aaaa" />
+          <clr-control-error *clrIfError="required">Campo Obrigatório</clr-control-error>
+        </clr-date-container>
+
+        <!-- interest -->
+        <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+          <clr-input-container>
+            <label class="w-100" style="white-space: nowrap;">Taxa a.a.</label>
+            <input class="w-100" clrInput formControlName="interest" id="interest" placeholder="%"
+              [imask]="imaskPercentConfig" [unmask]="true" />
+            <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+          </clr-input-container>
+        </div>
+
+        <!-- interestAM -->
+        <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+          <clr-input-container>
+            <label class="w-100" style="white-space: nowrap;">Taxa a.m. (%)</label>
+            <input class="w-100" clrInput formControlName="interestAM" id="interestAM" placeholder="%"
+              [imask]="imaskPercentConfig" [unmask]="true" />
+            <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+          </clr-input-container>
+        </div>
+      </div>
+
+      <div class="clr-row">
+
+        <!-- cet -->
+        <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+          <clr-input-container>
+            <label class="w-100" style="white-space: nowrap;">CET a.a.</label>
+            <input class="w-100" clrInput formControlName="cet" id="cet" placeholder="%" [imask]="imaskPercentConfig"
+              [unmask]="true" />
+            <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+          </clr-input-container>
+        </div>
+
+        <!-- cesh -->
+        <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+          <clr-input-container>
+            <label class="w-100" style="white-space: nowrap;">CESH</label>
+            <input class="w-100" clrInput formControlName="cesh" id="cesh" placeholder="%" [imask]="imaskPercentConfig"
+              [unmask]="true" />
+            <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+          </clr-input-container>
+        </div>
+
+        <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-1 clr-col-xl-2">
+          <clr-input-container>
+            <label class="w-100" style="white-space: nowrap;">Prazo</label>
+            <input class="w-100" clrInput formControlName="term" id="term" placeholder="anos"
+              [imask]="imaskIntegerConfig" [unmask]="true" />
+            <clr-control-error *clrIfError="'required'">Campo Obrigatório</clr-control-error>
+          </clr-input-container>
+        </div>
+
+      </div>
       <button clrStepButton="submit">submit</button>
     </clr-step-content>
   </clr-stepper-panel>
 </form>
+
+<!-- <pre>
+  {{ resourceForm.value | json }}
+</pre> -->

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, AfterViewInit } from '@angular/core';
 import { BaseResourceList } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Simulation } from '../shared/simulation.model';
 import { Saving } from '../../savings/shared/saving.model';
