@@ -1,1 +1,9 @@
-<p>report works!</p>
+<app-page-header pageTitle="Dashboard" [spinner]="false">
+</app-page-header>
+
+<div class="clr-row mb-2">
+  <div class="clr-col-md-12">
+    <app-progress-bars [entryValue]="entryValue" [singleValue]="singleValue" [monthlyValue]="monthlyValue">
+    </app-progress-bars>
+  </div>
+</div>

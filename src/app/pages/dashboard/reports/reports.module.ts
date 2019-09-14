@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportComponent } from './report/report.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ProgressBarsComponent } from './progress-bars/progress-bars.component';
 
 
 @NgModule({
-  declarations: [ReportComponent],
+  declarations: [ReportComponent, ProgressBarsComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     ReportsRoutingModule
   ]
 })
