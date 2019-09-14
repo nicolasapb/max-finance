@@ -193,6 +193,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   protected actionsForSuccess(resource: T, message: string): void {
     this.showToast(message, 'success');
+    this.navigateToDisplay(resource);
+  }
+
+  protected navigateToDisplay(resource: T): void {
     const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
     const baseComponentPath: string = this.route.snapshot.url[0].path;
     this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})

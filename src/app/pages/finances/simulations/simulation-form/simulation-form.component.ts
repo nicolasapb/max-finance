@@ -40,13 +40,25 @@ export class SimulationFormComponent extends BaseResourceFormComponent<Simulatio
     });
   }
 
+  protected createResource(): void {
+
+    const resource: Simulation = new Simulation();
+    const values = Object.values(this.resourceForm.value);
+    values.map( value => Object.entries(value).forEach((key) => resource[key[0]] = key[1]));
+    this.resourceService.create(resource)
+      .subscribe({
+        next: newResource => this.actionsForSuccess(newResource, 'Item criado com sucesso'),
+        error: error => this.actionsForError(error)
+      });
+  }
+
   protected setCurrentaction(): void {
     this.currencAction = 'new';
   }
 
   protected buildResourceForm(): void {
     this.resourceForm = this.formBuilder.group({
-      composition: this.formBuilder.group({
+      compositionGroup: this.formBuilder.group({
         id: [null],
         composition: [null, [Validators.required]],
         total: [null, [Validators.required]],
@@ -56,12 +68,12 @@ export class SimulationFormComponent extends BaseResourceFormComponent<Simulatio
         fundingPct: [null, [Validators.required]],
         renovation: [null, [Validators.required]]
       }),
-      installment: this.formBuilder.group({
+      installmentGroup: this.formBuilder.group({
         installment: [null, [Validators.required]],
         fundFees: [false, [Validators.required]],
         composeIncome: [true, [Validators.required]]
       }),
-      conditions: this.formBuilder.group({
+      conditionsGroup: this.formBuilder.group({
         interest: [null, [Validators.required]],
         interestAM: [null, [Validators.required]],
         cet: [null, [Validators.required]],
@@ -70,10 +82,6 @@ export class SimulationFormComponent extends BaseResourceFormComponent<Simulatio
         simDate: [this.today, [Validators.required]]
       })
     });
-  }
-
-  submit(): void {
-    console.log(this.resourceForm.value);
   }
 
   onClick(checked: boolean, value: TotalAmountSelect): void {
@@ -96,13 +104,22 @@ export class SimulationFormComponent extends BaseResourceFormComponent<Simulatio
     const funding = +this.contractValue - totalEntry;
     const fundingPct = 100 - entryPct;
     const renovation = +this.prevTotal - compositionAmount;
-    this.resourceForm.get(['composition', 'composition']).patchValue(compositionText);
-    this.resourceForm.get(['composition', 'total']).patchValue(compositionAmount.toString());
-    this.resourceForm.get(['composition', 'entry']).patchValue(totalEntry.toString());
-    this.resourceForm.get(['composition', 'entryPct']).patchValue(entryPct.toString());
-    this.resourceForm.get(['composition', 'funding']).patchValue(funding.toString());
-    this.resourceForm.get(['composition', 'fundingPct']).patchValue(fundingPct.toString());
-    this.resourceForm.get(['composition', 'renovation']).patchValue(renovation.toString());
+    this.resourceForm.get(['compositionGroup', 'composition']).patchValue(compositionText);
+    this.resourceForm.get(['compositionGroup', 'total']).patchValue(compositionAmount.toString());
+    this.resourceForm.get(['compositionGroup', 'entry']).patchValue(totalEntry.toString());
+    this.resourceForm.get(['compositionGroup', 'entryPct']).patchValue(entryPct.toString());
+    this.resourceForm.get(['compositionGroup', 'funding']).patchValue(funding.toString());
+    this.resourceForm.get(['compositionGroup', 'fundingPct']).patchValue(fundingPct.toString());
+    this.resourceForm.get(['compositionGroup', 'renovation']).patchValue(renovation.toString());
+  }
+
+  protected navigateToDisplay(): void {
+    const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
+    const baseComponentPath: string = this.route.snapshot.url[0].path;
+    this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
+      .then(
+        () => this.router.navigate([parentComponentPath, baseComponentPath])
+      );
   }
 
 }

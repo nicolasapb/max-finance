@@ -1,5 +1,5 @@
-<form clrStepper [formGroup]="resourceForm" (ngSubmit)="submit()">
-  <clr-stepper-panel formGroupName="composition">
+<form clrStepper [formGroup]="resourceForm" (ngSubmit)="submitForm()">
+  <clr-stepper-panel formGroupName="compositionGroup">
     <clr-step-title>Entrada</clr-step-title>
     <clr-step-description>Composição da entrada da simulação</clr-step-description>
     <clr-step-content *clrIfExpanded>
@@ -111,7 +111,7 @@
     </clr-step-content>
   </clr-stepper-panel>
 
-  <clr-stepper-panel formGroupName="installment">
+  <clr-stepper-panel formGroupName="installmentGroup">
     <clr-step-title>Parcelamento</clr-step-title>
     <clr-step-description>Valor da Primeira Parcela e opções de fincanciamento</clr-step-description>
     <clr-step-content *clrIfExpanded>
@@ -127,7 +127,7 @@
       <!-- fundFees -->
       <div class="mt-2">
         <clr-toggle-wrapper>
-          <input type="checkbox" clrToggle [value]="this.resourceForm.get(['installment', 'fundFees']).value"
+          <input type="checkbox" clrToggle [value]="this.resourceForm.get(['installmentGroup', 'fundFees']).value"
             name="fundFees" formControlName="fundFees" />
           <label>Financiar Taxas</label>
         </clr-toggle-wrapper>
@@ -136,7 +136,7 @@
       <!-- composeIncome -->
       <div class="mt-2">
         <clr-toggle-wrapper>
-          <input type="checkbox" clrToggle [value]="this.resourceForm.get(['installment', 'composeIncome']).value"
+          <input type="checkbox" clrToggle [value]="this.resourceForm.get(['installmentGroup', 'composeIncome']).value"
             name="composeIncome" formControlName="composeIncome" />
           <label>Compor Renda</label>
         </clr-toggle-wrapper>
@@ -147,7 +147,7 @@
     </clr-step-content>
   </clr-stepper-panel>
 
-  <clr-stepper-panel formGroupName="conditions">
+  <clr-stepper-panel formGroupName="conditionsGroup">
     <clr-step-title>Condições</clr-step-title>
     <clr-step-description>Taxas e Condições do Financiamento</clr-step-description>
     <clr-step-content *clrIfExpanded>
@@ -219,7 +219,3 @@
     </clr-step-content>
   </clr-stepper-panel>
 </form>
-
-<!-- <pre>
-  {{ resourceForm.value | json }}
-</pre> -->
