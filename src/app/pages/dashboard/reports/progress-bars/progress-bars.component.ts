@@ -16,8 +16,8 @@ export class ProgressBarsComponent implements OnInit {
   ngOnInit() {
   }
 
-  setColor(value: number): string {
-    return +value === 100 ? 'primary' : 'warn';
+  setColor(value: number): boolean {
+    return +value === 100 ? true : false;
   }
 
 }

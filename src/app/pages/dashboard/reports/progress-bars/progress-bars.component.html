@@ -1,1 +1,19 @@
-<p>progress-bars works!</p>
+<div class="w-75">
+
+  <div class="mb-1">
+    <label for="entryValue">Entrada</label>
+    <clr-progress-bar id="entryValue" [clrValue]="entryValue" [clrSuccess]="setColor(entryValue)"></clr-progress-bar>
+  </div>
+
+  <div class="mb-1">
+    <label for="singleValue">Parcela Unica</label>
+    <clr-progress-bar id="singleValue" [clrValue]="singleValue" [clrSuccess]="setColor(singleValue)"></clr-progress-bar>
+  </div>
+
+  <div class="mb-1">
+    <label for="monthlyValue">Mensal</label>
+    <clr-progress-bar id="monthlyValue" [clrValue]="monthlyValue" [clrSuccess]="setColor(monthlyValue)">
+    </clr-progress-bar>
+  </div>
+
+</div>
