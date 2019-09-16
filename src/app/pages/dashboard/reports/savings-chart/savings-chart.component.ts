@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SavingService } from 'src/app/pages/finances/savings/shared/saving.service';
 import { Saving } from 'src/app/pages/finances/savings/shared/saving.model';
-import { ChartType, ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-savings-chart',
@@ -29,7 +29,7 @@ export class SavingsChartComponent implements OnInit {
   };
   public pieChartLabels: Label[] = [];
   public pieChartData: number[] = [];
-  public pieChartType: ChartType = 'pie';
+  public pieChartType: ChartType = 'doughnut';
   public pieChartLegend = true;
   public pieChartColors = [
     {
@@ -44,6 +44,7 @@ export class SavingsChartComponent implements OnInit {
       ],
     },
   ];
+
   constructor(
     protected savingService: SavingService
   ) { }
@@ -69,7 +70,6 @@ export class SavingsChartComponent implements OnInit {
           if (sum.hasOwnProperty(key)) {
             this.pieChartLabels.push(key);
             this.pieChartData.push(sum[key]);
-            // this.pieChartColors[0].backgroundColor.push(this.dynamicColors());
           }
         });
       }
@@ -88,10 +88,4 @@ export class SavingsChartComponent implements OnInit {
     return found.text;
   }
 
-  dynamicColors(): string {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return `rgba(${r},${g},${b},0.65)`;
- }
 }
