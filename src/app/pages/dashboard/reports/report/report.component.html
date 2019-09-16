@@ -21,31 +21,22 @@
 <div class="clr-row mb-2">
 
   <div class="clr-col-12 clr-col-sm-12 clr-col-md-4	clr-col-lg-4 clr-col-xl-4">
-    <div class="card">
-      <div class="card-block">
-        <h3 class="card-title">Title</h3>
-        <p class="card-text">
-          Content
-        </p>
-      </div>
-      <div class="card-footer">
-        <a href="#" class="btn btn-sm btn-link">Action</a>
-      </div>
-    </div>
+    <app-installment-progress 
+      *ngIf="singleInstallment.length > 0" 
+      title="Parcela Única"
+      buttonText="nova economia" 
+      route="/finances/savings/new" 
+      [installment]="singleInstallment">
+    </app-installment-progress>
   </div>
 
   <div class="clr-col-12 clr-col-sm-12 clr-col-md-4	clr-col-lg-4 clr-col-xl-4">
-    <div class="card">
-      <div class="card-block">
-        <h3 class="card-title">Title</h3>
-        <p class="card-text">
-          Content
-        </p>
-      </div>
-      <div class="card-footer">
-        <a href="#" class="btn btn-sm btn-link">Action</a>
-      </div>
-    </div>
-  </div>  
+    <app-installment-progress
+      *ngIf="monthlyInstallment.length > 0" 
+      title="Parcelas Mensais" 
+      buttonText="novo pagamento"
+      route="/finances/payments/new"
+      [installment]="monthlyInstallment"></app-installment-progress>
+  </div>
 
 </div>

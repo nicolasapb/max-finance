@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-block">
+
+      <div class="progress top" [class.success]="setColor(installment[0].totalPct)">
+          <progress [value]="installment[0].totalPct"  max="100"></progress>
+      </div>    
+
+    <h3 class="card-title">{{title}}</h3>
+    <table class="table table-noborder table-compact">
+        <thead>
+          <tr>
+            <th *ngFor="let col of cols" class="left">{{col}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of installment">
+            <td class="left">{{row.total | number:'0.2-2':'pt' }}</td>
+            <td class="left">{{row.needs | number:'0.2-2':'pt' }} </td>
+            <td class="left">{{row.totalPct | number:'0.2-2':'pt' }}</td>
+            <td class="left">{{row.needsPct | number:'0.2-2':'pt' }}</td>
+            <td class="left">{{row.target | number:'0.2-2':'pt' }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="card-footer">
+    <a [routerLink]="route" class="btn btn-sm btn-link">{{buttonText}}</a>
+  </div>
+</div>

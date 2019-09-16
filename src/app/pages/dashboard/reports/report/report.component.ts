@@ -4,6 +4,7 @@ import { SavingService } from 'src/app/pages/finances/savings/shared/saving.serv
 import { Payment } from 'src/app/pages/finances/payments/shared/payment.model';
 import { Saving } from 'src/app/pages/finances/savings/shared/saving.model';
 import { ToastService } from 'src/app/core/components/toast';
+import { InstallmentProgress } from '../installment-progress/installment-progress.component';
 
 @Component({
   selector: 'app-report',
@@ -22,6 +23,8 @@ export class ReportComponent implements OnInit {
 
   public payments: Payment[];
   public savings: Saving[];
+  public monthlyInstallment: InstallmentProgress[] = [];
+  public singleInstallment: InstallmentProgress[] = [];
 
   constructor(
     protected paymentService: PaymentService,
@@ -62,13 +65,14 @@ export class ReportComponent implements OnInit {
     const needsPct = 100 - this.monthlyValue;
     const totalPct = this.monthlyValue;
 
-    // this.monthlyInstallment.push({
-    //   total,
-    //   target,
-    //   needs,
-    //   needsPct,
-    //   totalPct
-    // });
+    this.monthlyInstallment.push({
+      total,
+      target,
+      needs,
+      needsPct,
+      totalPct
+    });
+
   }
 
   protected calculatePaymentPct(type: string, contractValue: number): number {
@@ -94,13 +98,13 @@ export class ReportComponent implements OnInit {
     const needsPct = (needs / total) * 100;
     const totalPct = 100 - needsPct;
 
-    // this.singleInstallment.push({
-    //   total,
-    //   target,
-    //   needs,
-    //   needsPct,
-    //   totalPct
-    // });
+    this.singleInstallment.push({
+      total,
+      target,
+      needs,
+      needsPct,
+      totalPct
+    });
 
   }
 
