@@ -14,6 +14,7 @@ import { ClarityModule } from '@clr/angular';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
     RouterModule,
     ClarityModule,
     IMaskModule,
+    ChartsModule
   ],
   exports: [
     // Shared Modules
@@ -37,6 +39,7 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
     RouterModule,
     ClarityModule,
     IMaskModule,
+    ChartsModule,
 
     // Shared Components
     CnpjPipe,
