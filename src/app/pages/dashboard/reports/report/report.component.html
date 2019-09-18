@@ -2,7 +2,7 @@
 </app-page-header>
 
 <div class="clr-row mb-2">
-  <div class="clr-col-12 clr-col-sm-12 clr-col-md-8	clr-col-lg-8 clr-col-xl-8">
+  <div class="clr-col-12 clr-col-sm-12 clr-col-md-10	clr-col-lg-10 clr-col-xl-10">
     <app-progress-bars [entryValue]="entryValue" [singleValue]="singleValue" [monthlyValue]="monthlyValue">
     </app-progress-bars>
   </div>
@@ -10,7 +10,7 @@
 
 <div class="clr-row mb-2">
 
-  <div class="clr-col-12 clr-col-sm-12 clr-col-md-8	clr-col-lg-8 clr-col-xl-8">
+  <div class="clr-col-12 clr-col-sm-12 clr-col-md-10	clr-col-lg-10 clr-col-xl-10">
     <div class="w-100">
       <app-sumamry-card></app-sumamry-card>
     </div>
@@ -20,7 +20,7 @@
 
 <div class="clr-row mb-2">
 
-  <div class="clr-col-12 clr-col-sm-12 clr-col-md-4	clr-col-lg-4 clr-col-xl-4">
+  <div class="clr-col-12 clr-col-sm-12 clr-col-md-5	clr-col-lg-5 clr-col-xl-5">
     <app-installment-progress 
       *ngIf="singleInstallment.length > 0" 
       title="Parcela Única"
@@ -30,7 +30,7 @@
     </app-installment-progress>
   </div>
 
-  <div class="clr-col-12 clr-col-sm-12 clr-col-md-4	clr-col-lg-4 clr-col-xl-4">
+  <div class="clr-col-12 clr-col-sm-12 clr-col-md-5	clr-col-lg-5 clr-col-xl-5">
     <app-installment-progress
       *ngIf="monthlyInstallment.length > 0" 
       title="Parcelas Mensais" 
@@ -43,7 +43,7 @@
 
 <div class="w-100 ">
     <div class="clr-row mb-2">
-        <div class="clr-col-12 clr-col-sm-12 clr-col-md-8	clr-col-lg-8 clr-col-xl-8">
+        <div class="clr-col-12 clr-col-sm-12 clr-col-md-10 clr-col-lg-10 clr-col-xl-10">
             <app-savings-chart></app-savings-chart>
         </div>
     </div>
