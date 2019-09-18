@@ -1,6 +1,6 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import localePt from '@angular/common/locales/pt';
@@ -26,6 +26,7 @@ import { ChartsModule } from 'ng2-charts';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule,
     ClarityModule,
@@ -35,6 +36,7 @@ import { ChartsModule } from 'ng2-charts';
   exports: [
     // Shared Modules
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule,
     ClarityModule,

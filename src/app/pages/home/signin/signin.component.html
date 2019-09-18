@@ -1,0 +1,28 @@
+<div class="login-wrapper">
+  <form class="login" [formGroup]="loginForm" (submit)="login()">
+      <section class="title">
+          <h3 class="welcome">Bem vindo!</h3>
+          maxFinance
+          <h5 class="hint">Faça o login para continuar</h5>
+      </section>
+      <div class="login-group">
+          <clr-input-container>
+              <label class="clr-sr-only">Usuário</label>
+              <input type="text" name="username" clrInput placeholder="Usuário" formControlName="userName">
+          </clr-input-container>
+          <clr-password-container>
+              <label class="clr-sr-only">Senha</label>
+              <input type="password" name="password" clrPassword placeholder="Senha" formControlName="password">
+          </clr-password-container>
+          <clr-checkbox-wrapper>
+              <label>Lembrar de mim</label>
+              <input type="checkbox" name="rememberMe" clrCheckbox />
+          </clr-checkbox-wrapper>
+          <div class="error active" [class.active]="loginForm.invalid && loginForm.touched">
+             Usuário ou Senha inválido(s)
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">seguir</button>
+          <a href="javascript://" class="signup">Criar uma conta</a>
+      </div>
+  </form>
+</div>
