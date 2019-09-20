@@ -829,3 +829,7 @@ button.bg-dark:focus {
 .float-none {
   float: none !important;
 }
+
+.content-area {
+  padding: 0 !important;
+}
