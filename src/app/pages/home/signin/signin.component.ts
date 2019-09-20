@@ -34,7 +34,7 @@ export class SigninComponent implements OnInit {
     const userName = this.loginForm.get('userName').value;
     const password = this.loginForm.get('password').value;
     this.loginError = false;
-    this.authService.authenticate(userName, password).subscribe({
+    this.authService.authenticate(userName, password, true).subscribe({
       next: () => {
         console.log('autenticado');
         this.router.navigate(['dashboard']);
