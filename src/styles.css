@@ -831,5 +831,7 @@ button.bg-dark:focus {
 }
 
 .content-area {
-  padding: 0 !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }

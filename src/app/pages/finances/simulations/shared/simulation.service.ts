@@ -8,6 +8,6 @@ import { Simulation } from './simulation.model';
 export class SimulationService extends BaseResourceService<Simulation> {
 
   constructor(protected injector: Injector) {
-    super('api/simulations', injector, Simulation.fromJson);
+    super('/simulations', injector, Simulation.fromJson);
   }
 }

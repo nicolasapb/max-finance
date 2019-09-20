@@ -6,6 +6,8 @@ import { catchError, map, flatMap } from 'rxjs/operators';
 
 import { BaseResourceModel } from '../models/base-resource.model';
 
+const API_URL = 'http://localhost:3000';
+
 export abstract class BaseResourceService<T extends BaseResourceModel> {
 
   protected httpOptions = {
@@ -13,13 +15,15 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   };
 
   protected http: HttpClient;
+  protected apiPath: string;
 
   constructor(
-    protected apiPath: string,
+    protected accessPath: string,
     protected injector: Injector,
     protected jsonDataToResourceFn: (jsonData: any) => T
   ) {
       this.http = injector.get(HttpClient);
+      this.apiPath = API_URL + accessPath;
     }
 
   // C R U D

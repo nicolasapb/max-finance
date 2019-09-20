@@ -8,6 +8,6 @@ import { Saving } from './saving.model';
 export class SavingService extends BaseResourceService<Saving> {
 
   constructor(protected injector: Injector) {
-    super('api/savings', injector, Saving.fromJson);
+    super('/savings', injector, Saving.fromJson);
   }
 }
