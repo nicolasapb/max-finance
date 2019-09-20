@@ -18,7 +18,7 @@
         <label>Lembrar de mim</label>
         <input type="checkbox" name="rememberMe" clrCheckbox />
       </clr-checkbox-wrapper>
-      <div class="error active" [class.active]="loginForm.invalid && loginForm.touched">
+      <div class="error active" [class.active]="loginError">
         Usuário ou Senha inválido(s)
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">seguir</button>

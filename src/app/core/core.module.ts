@@ -19,7 +19,7 @@ import { ToastModule } from './components/toast/toast.module';
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase, {delay: 100}),
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase, {delay: 100}),
     ToastModule.forRoot(),
   ],
   exports: [
