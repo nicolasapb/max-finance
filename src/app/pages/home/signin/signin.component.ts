@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
+import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 
 @Component({
   selector: 'app-signin',
@@ -18,7 +19,8 @@ export class SigninComponent implements OnInit {
   constructor(
     protected formBuilder: FormBuilder,
     protected authService: AuthService,
-    protected router: Router
+    protected router: Router,
+    protected platformDetectorService: PlatformDetectorService
   ) {  }
 
   ngOnInit() {
@@ -41,7 +43,9 @@ export class SigninComponent implements OnInit {
         console.log(err);
         this.loginError = true;
         this.loginForm.reset();
-        this.userNameInput.nativeElement.focus();
+        // tslint:disable-next-line:no-unused-expression
+        this.platformDetectorService.isPlatformBrowser() &&
+          this.userNameInput.nativeElement.focus();
       }
     });
   }
