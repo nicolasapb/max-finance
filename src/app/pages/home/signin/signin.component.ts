@@ -15,6 +15,7 @@ export class SigninComponent implements OnInit {
   public loginError = false;
 
   @ViewChild('userNameInput', {static: true}) userNameInput: ElementRef<HTMLInputElement>;
+  @ViewChild('rememberMe', {static: true}) rememberMe: ElementRef<HTMLInputElement>;
 
   constructor(
     protected formBuilder: FormBuilder,
@@ -34,7 +35,7 @@ export class SigninComponent implements OnInit {
     const userName = this.loginForm.get('userName').value;
     const password = this.loginForm.get('password').value;
     this.loginError = false;
-    this.authService.authenticate(userName, password, true).subscribe({
+    this.authService.authenticate(userName, password, this.rememberMe.nativeElement.checked).subscribe({
       next: () => {
         console.log('autenticado');
         this.router.navigate(['dashboard']);

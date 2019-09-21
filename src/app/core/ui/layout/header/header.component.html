@@ -5,12 +5,7 @@
       <span class="title">maxFinance</span>      
     </a>
   </div>
-  <!-- placeholder por enquanto -->
-  <!-- <form class="search">
-      <label for="search_input">
-          <input id="search_input" type="text" placeholder="Search for keywords...">
-      </label>
-  </form>   -->
+
   <div class="header-actions">
       <clr-dropdown>
           <button class="nav-icon" clrDropdownTrigger aria-label="open user menu">
@@ -18,16 +13,16 @@
               <clr-icon shape="caret down"></clr-icon>
           </button>
           <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+              <h4 class="dropdown-header">nome do usuário</h4>
+              <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
               <a [routerLink]="[ '/home' ]" clrDropdownItem>About</a>
               <a [routerLink]="[ '/home' ]" clrDropdownItem>Preferences</a>
-              <a [routerLink]="[ '/home' ]"clrDropdownItem>Log out</a>
+              <span (click)="logout()" clrDropdownItem>Log out</span>
           </clr-dropdown-menu>
       </clr-dropdown>
   </div>
-  <!-- fim -->
 </clr-header>
 <nav class="subnav" [clr-nav-level]="1">
-  <!-- quero deixar dinamico depois -->
   <ul class="nav">
     <li class="nav-item" >
         <a class="nav-link" [routerLink]="[ '/dashboard' ]" routerLinkActive="active">Dashboard</a>
