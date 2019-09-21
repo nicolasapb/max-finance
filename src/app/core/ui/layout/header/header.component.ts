@@ -2,24 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/user/user.service';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   public user$: Observable<User>;
-  public user: User;
 
-  constructor(protected userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {
     this.user$ = userService.getUser();
-    this.user$.subscribe({
-      next: user => this.user = user
-    });
   }
 
-  ngOnInit() { }
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['']);
+  }
 
 }

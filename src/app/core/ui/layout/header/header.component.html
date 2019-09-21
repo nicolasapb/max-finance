@@ -1,37 +1,42 @@
 <clr-header class="header-7">
   <div class="branding">
-    <a [routerLink]="['/home']">
+    <a [routerLink]="['']">
       <clr-icon shape="dollar" class="is-solid custom-color"></clr-icon>
-      <span class="title">maxFinance</span>      
+      <span class="title">maxFinance</span>
     </a>
   </div>
 
   <div class="header-actions">
-      <div *ngIf="!user">
-        <a [routerLink]="[ '/home' ]">Login</a>
-      </div>
-      <clr-dropdown *ngIf="user">
-          <button class="nav-icon" clrDropdownTrigger aria-label="menu do usuário">
-              <clr-icon shape="user"></clr-icon>
-              <clr-icon shape="caret down"></clr-icon>
-          </button>
-          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-              <h4 class="dropdown-header">{{ user?.name }}</h4>
-              <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-              <a [routerLink]="[ '/home' ]" clrDropdownItem>Sobre</a>
-              <a [routerLink]="[ '/home' ]" clrDropdownItem>Preferências</a>
-              <span (click)="logout()" clrDropdownItem>Log out</span>
-          </clr-dropdown-menu>
-      </clr-dropdown>
+    <clr-dropdown *ngIf="(user$ | async) as user; else login">
+      <button class="nav-icon" clrDropdownTrigger aria-label="menu do usuário">
+        <clr-icon shape="user"></clr-icon>
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <h4 class="dropdown-header">{{ user.name | uppercase }}</h4>
+        <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+        <a [routerLink]="['']" clrDropdownItem>Sobre</a>
+        <a [routerLink]="['']" clrDropdownItem>Preferências</a>
+        <span (click)="logout()" clrDropdownItem>
+          <clr-icon shape="logout"></clr-icon>&nbsp;<span style="vertical-align: middle;">Sair</span>
+        </span>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+    <ng-template #login>
+      <a [routerLink]="['']" class="nav-link nav-icon-text">
+        <clr-icon shape="login"></clr-icon>
+        <span style="vertical-align: middle;" class="nav-text">Entrar</span>
+      </a>
+    </ng-template>
   </div>
 </clr-header>
-<nav class="subnav" [clr-nav-level]="1">
+<nav class="subnav" [clr-nav-level]="1" *ngIf="(user$ | async) as user">
   <ul class="nav">
-    <li class="nav-item" >
-        <a class="nav-link" [routerLink]="[ '/dashboard' ]" routerLinkActive="active">Dashboard</a>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="[ '/dashboard' ]" routerLinkActive="active">Dashboard</a>
     </li>
-    <li class="nav-item" >
-        <a class="nav-link" [routerLink]="[ '/finances' ]" routerLinkActive="active">Finanças</a>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="[ '/finances' ]" routerLinkActive="active">Finanças</a>
     </li>
   </ul>
 </nav>
