@@ -1,5 +1,5 @@
 <div class="login-wrapper h-auto">
-  <form class="login">
+  <form class="login" [formGroup]="signupForm">
     <section class="title">
       <h3 class="welcome">Cadastro de nova conta</h3>
       <h5 class="hint">Insira os seus dados abaixo para criar uma nova conta</h5>
@@ -7,34 +7,34 @@
     <div class="login-group">
 
       <clr-input-container>
-        <label class="w-100" for="email">E-mail</label>
-        <input class="w-100" clrInput id="email" autofocus />
+        <label for="email">E-mail</label>
+        <input clrInput id="email" autofocus formControlName="email"/>
         <clr-control-helper>e-mail para utilizar na nova conta</clr-control-helper>
       </clr-input-container>
 
       <clr-input-container>
-        <label class="w-100" for="fullName">Nome Completo</label>
-        <input class="w-100" clrInput id="fullName" />
+        <label for="fullName">Nome Completo</label>
+        <input clrInput id="fullName" formControlName="fullName"/>
         <clr-control-helper>nome completo do usuário</clr-control-helper>
       </clr-input-container>
 
       <clr-input-container>
-        <label class="w-100" for="email">Nome de usuário</label>
-        <input class="w-100" clrInput id="userName" />
-        <clr-control-helper>usuáro para realizar o login</clr-control-helper>
+        <label for="email">Nome de usuário</label>
+        <input clrInput id="userName" formControlName="userName"/>
+        <clr-control-helper>usuáro para realizar o login (letras minusculas e não deve iniciar com números)</clr-control-helper>
       </clr-input-container>
 
       <clr-password-container>
-        <label class="w-100" for="password">Senha</label>
-        <input class="w-100" clrPassword id="password" name="password" />
-        <clr-control-helper>senha</clr-control-helper>
+        <label for="password">Senha</label>
+        <input clrPassword id="password" name="password" formControlName="password"/>
+        <clr-control-helper>senha: mínimo 8 caractéres e no máximo 14 caratéres</clr-control-helper>
       </clr-password-container>
 
-      <div class="error active" [class.active]="false">
-        Usuário ou Senha inválido(s)
+      <div class="error active" [class.active]="signupForm.invalid && signupForm.touched">
+        Dados inseridos são inválidos
       </div>
 
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Cadastrar</button>
       <p class="text-center">Já está cadastrado?&nbsp;<a [routerLink]="['']">Entrar</a></p>
     </div>
   </form>
