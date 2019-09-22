@@ -31,21 +31,47 @@
         <clr-control-helper>mínimo de 8 caracteres e máximo de 14 caracteres</clr-control-helper>
       </clr-password-container>
 
-      <div class="error active" [class.active]="(signupForm.invalid || signupForm.pending) && signupForm.touched">
+      <div class="error active" [class.active]="(signupForm.invalid || signupForm.pending) && !signupForm.pristine">
         <ul class="list-unstyled">
-            <li *ngIf="signupForm.get('email').errors?.required">e-mail é obrigatório!</li>
-            <li *ngIf="signupForm.get('email').errors?.email">e-mail inválido</li>
-            <li *ngIf="signupForm.get('fullName').errors?.required">nome completo é obrigatório!</li>
-            <li *ngIf="signupForm.get('fullName').errors?.minlength">mínimo de 02 caracteres para o campo "Nome Completo"</li>
-            <li *ngIf="signupForm.get('fullName').errors?.maxlength">máximo de 40 caracteres para o campo "Nome Completo"</li>
-            <li *ngIf="signupForm.get('userName').errors?.required">nome de usuário é obrigatório</li>
-            <li *ngIf="signupForm.get('userName').errors?.minlength">mínimo de 02 caracteres para o campo "Nome de Usuário"</li>
-            <li *ngIf="signupForm.get('userName').errors?.maxlength">máximo de 16 caracteres para o campo "Nome de Usuário"</li>
-            <li *ngIf="signupForm.get('userName').errors?.lowerCase">nome do usuário deve ser em letras minúsculas e não começar com números</li>
-            <li *ngIf="signupForm.get('userName').errors?.userNameTaken">nome do usuário já existe</li>
-            <li *ngIf="signupForm.get('password').errors?.required">senha é obrigatória!</li>
-            <li *ngIf="signupForm.get('password').errors?.minlength">mínimo de 08 caracteres para o campo "Senha"</li>
-            <li *ngIf="signupForm.get('password').errors?.maxlength">máximo de 14 caracteres para o campo "Senha"</li>
+            <li *ngIf="signupForm.get('email').errors?.required && signupForm.get('email').pristine">
+              e-mail é obrigatório!
+            </li>
+            <li *ngIf="signupForm.get('email').errors?.email && signupForm.get('email').touched">
+              e-mail inválido
+            </li>
+            <li *ngIf="signupForm.get('fullName').errors?.required && signupForm.get('fullName').touched">
+              nome completo é obrigatório!
+            </li>
+            <li *ngIf="signupForm.get('fullName').errors?.minlength && signupForm.get('fullName').touched">
+              mínimo de 02 caracteres para o campo "Nome Completo"
+            </li>
+            <li *ngIf="signupForm.get('fullName').errors?.maxlength && signupForm.get('fullName').touched">
+              máximo de 40 caracteres para o campo "Nome Completo"
+            </li>
+            <li *ngIf="signupForm.get('userName').errors?.required && signupForm.get('userName').touched">
+              nome de usuário é obrigatório
+            </li>
+            <li *ngIf="signupForm.get('userName').errors?.minlength && signupForm.get('userName').touched">
+              mínimo de 02 caracteres para o campo "Nome de Usuário"
+            </li>
+            <li *ngIf="signupForm.get('userName').errors?.maxlength && signupForm.get('userName').touched">
+              máximo de 16 caracteres para o campo "Nome de Usuário"
+            </li>
+            <li *ngIf="signupForm.get('userName').errors?.lowerCase && signupForm.get('userName').touched">
+              nome do usuário deve ser em letras minúsculas e não começar com números
+            </li>
+            <li *ngIf="signupForm.get('userName').errors?.userNameTaken && signupForm.get('userName').touched">
+              nome do usuário já existe
+            </li>
+            <li *ngIf="signupForm.get('password').errors?.required && signupForm.get('password').touched">
+              senha é obrigatória!
+            </li>
+            <li *ngIf="signupForm.get('password').errors?.minlength && signupForm.get('password').touched">
+              mínimo de 08 caracteres para o campo "Senha"
+            </li>
+            <li *ngIf="signupForm.get('password').errors?.maxlength && signupForm.get('password').touched">
+              máximo de 14 caracteres para o campo "Senha"
+            </li>
         </ul> 
       </div>
 
