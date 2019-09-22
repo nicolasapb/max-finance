@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { UserNotTakenValidatorService } from './shared/user-not-taken.validator.
 import { NewUser } from './shared/new-user';
 import { SignupService } from './shared/signup.service';
 import { ToastService } from 'src/app/core/components/toast/toast.service';
+import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,13 +16,16 @@ import { ToastService } from 'src/app/core/components/toast/toast.service';
 })
 export class SignupComponent implements OnInit {
 
+  @ViewChild('emailInput', {static: true}) emailInput: ElementRef<HTMLInputElement>;
   public signupForm: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     private userNotTakenValidatorService: UserNotTakenValidatorService,
     private signupService: SignupService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    protected platformDetectorService: PlatformDetectorService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +44,9 @@ export class SignupComponent implements OnInit {
       ],
       password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(14)]],
     });
+    // tslint:disable-next-line:no-unused-expression
+    this.platformDetectorService.isPlatformBrowser() &&
+      this.emailInput.nativeElement.focus();    
   }
 
   signup(): void {

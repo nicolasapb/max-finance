@@ -29,6 +29,9 @@ export class SigninComponent implements OnInit {
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
+    // tslint:disable-next-line:no-unused-expression
+    this.platformDetectorService.isPlatformBrowser() &&
+      this.userNameInput.nativeElement.focus();
   }
 
   login(): void {

@@ -6,8 +6,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule)
   },
   {
     path: 'finances',
