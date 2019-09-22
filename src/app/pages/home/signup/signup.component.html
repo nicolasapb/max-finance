@@ -1,5 +1,5 @@
 <div class="login-wrapper h-auto">
-  <form class="login" [formGroup]="signupForm">
+  <form class="login" [formGroup]="signupForm" (submit)="signup()">
     <section class="title">
       <h3 class="welcome">Cadastro de nova conta</h3>
       <h5 class="hint">Insira os seus dados abaixo para criar uma nova conta</h5>
@@ -19,22 +19,37 @@
       </clr-input-container>
 
       <clr-input-container>
-        <label for="email">Nome de usuário</label>
+        <label for="email">Nome de Usuário</label>
         <input clrInput id="userName" formControlName="userName"/>
         <clr-control-helper>usuáro para realizar o login (letras minusculas e não deve iniciar com números)</clr-control-helper>
+        <clr-control-helper *ngIf="signupForm.get('userName').valid">usuário disponível</clr-control-helper>
       </clr-input-container>
 
       <clr-password-container>
         <label for="password">Senha</label>
         <input clrPassword id="password" name="password" formControlName="password"/>
-        <clr-control-helper>senha: mínimo 8 caractéres e no máximo 14 caratéres</clr-control-helper>
+        <clr-control-helper>mínimo de 8 caracteres e máximo de 14 caracteres</clr-control-helper>
       </clr-password-container>
 
-      <div class="error active" [class.active]="signupForm.invalid && signupForm.touched">
-        Dados inseridos são inválidos
+      <div class="error active" [class.active]="(signupForm.invalid || signupForm.pending) && signupForm.touched">
+        <ul class="list-unstyled">
+            <li *ngIf="signupForm.get('email').errors?.required">e-mail é obrigatório!</li>
+            <li *ngIf="signupForm.get('email').errors?.email">e-mail inválido</li>
+            <li *ngIf="signupForm.get('fullName').errors?.required">nome completo é obrigatório!</li>
+            <li *ngIf="signupForm.get('fullName').errors?.minlength">mínimo de 02 caracteres para o campo "Nome Completo"</li>
+            <li *ngIf="signupForm.get('fullName').errors?.maxlength">máximo de 40 caracteres para o campo "Nome Completo"</li>
+            <li *ngIf="signupForm.get('userName').errors?.required">nome de usuário é obrigatório</li>
+            <li *ngIf="signupForm.get('userName').errors?.minlength">mínimo de 02 caracteres para o campo "Nome de Usuário"</li>
+            <li *ngIf="signupForm.get('userName').errors?.maxlength">máximo de 16 caracteres para o campo "Nome de Usuário"</li>
+            <li *ngIf="signupForm.get('userName').errors?.lowerCase">nome do usuário deve ser em letras minúsculas e não começar com números</li>
+            <li *ngIf="signupForm.get('userName').errors?.userNameTaken">nome do usuário já existe</li>
+            <li *ngIf="signupForm.get('password').errors?.required">senha é obrigatória!</li>
+            <li *ngIf="signupForm.get('password').errors?.minlength">mínimo de 08 caracteres para o campo "Senha"</li>
+            <li *ngIf="signupForm.get('password').errors?.maxlength">máximo de 14 caracteres para o campo "Senha"</li>
+        </ul> 
       </div>
 
-      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Cadastrar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid || signupForm.pending">Cadastrar</button>
       <p class="text-center">Já está cadastrado?&nbsp;<a [routerLink]="['']">Entrar</a></p>
     </div>
   </form>
