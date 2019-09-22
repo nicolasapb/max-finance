@@ -1,0 +1,41 @@
+<div class="login-wrapper h-auto">
+  <form class="login">
+    <section class="title">
+      <h3 class="welcome">Cadastro de nova conta</h3>
+      <h5 class="hint">Insira os seus dados abaixo para criar uma nova conta</h5>
+    </section>
+    <div class="login-group">
+
+      <clr-input-container>
+        <label class="w-100" for="email">E-mail</label>
+        <input class="w-100" clrInput id="email" autofocus />
+        <clr-control-helper>e-mail para utilizar na nova conta</clr-control-helper>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="w-100" for="fullName">Nome Completo</label>
+        <input class="w-100" clrInput id="fullName" />
+        <clr-control-helper>nome completo do usuário</clr-control-helper>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="w-100" for="email">Nome de usuário</label>
+        <input class="w-100" clrInput id="userName" />
+        <clr-control-helper>usuáro para realizar o login</clr-control-helper>
+      </clr-input-container>
+
+      <clr-password-container>
+        <label class="w-100" for="password">Senha</label>
+        <input class="w-100" clrPassword id="password" name="password" />
+        <clr-control-helper>senha</clr-control-helper>
+      </clr-password-container>
+
+      <div class="error active" [class.active]="false">
+        Usuário ou Senha inválido(s)
+      </div>
+
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <p class="text-center">Já está cadastrado?&nbsp;<a [routerLink]="['']">Entrar</a></p>
+    </div>
+  </form>
+</div>

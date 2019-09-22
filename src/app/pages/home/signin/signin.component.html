@@ -22,7 +22,7 @@
         Usuário ou Senha inválido(s)
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">entrar</button>
-      <a href="javascript://" class="signup">Criar uma conta</a>
+      <a [routerLink]="['signup']" class="signup">Criar uma conta</a>
     </div>
   </form>
 </div>
