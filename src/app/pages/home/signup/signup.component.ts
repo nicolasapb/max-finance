@@ -12,7 +12,8 @@ import { PlatformDetectorService } from 'src/app/core/platform-detector/platform
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [UserNotTakenValidatorService]
 })
 export class SignupComponent implements OnInit {
 
@@ -46,14 +47,17 @@ export class SignupComponent implements OnInit {
     });
     // tslint:disable-next-line:no-unused-expression
     this.platformDetectorService.isPlatformBrowser() &&
-      this.emailInput.nativeElement.focus();    
+      this.emailInput.nativeElement.focus();
   }
 
   signup(): void {
     const newUser = this.signupForm.getRawValue() as NewUser;
     this.signupService.signup(newUser)
       .subscribe({
-        next: () => this.router.navigate(['']),
+        next: () => {
+          this.router.navigate(['']);
+          this.toastService.show({ text: 'Conta criada com sucesso', type: 'success'});
+        },
         error: err => {
           console.error(err);
           this.toastService.show({ text: 'Ocorreu um erro no servidor', type: 'danger'});
