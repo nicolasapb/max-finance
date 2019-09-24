@@ -4,7 +4,7 @@
     [spinnerCondition]="!resources">
 </app-page-header>
 
-<div class="clr-row">
+<div class="clr-row mb-5">
 
   <div class="clr-col-sm-12 clr-col-md-12">
     <h3>Totais</h3>
@@ -52,7 +52,7 @@
 
     <div class="mb-3"><h3>Histórico de simulações realizadas</h3></div>
 
-    <button class="btn btn-sm" (click)="showForm = !showForm">adicionar</button> 
+    <button class="btn btn-sm" (click)="showForm = !showForm">criar simulação</button> 
     
     <app-simulation-form *ngIf="showForm" 
         [totals]="prevTotalByType"
@@ -148,7 +148,7 @@
                 <clr-dg-cell>{{resource.composeIncomeText }}</clr-dg-cell>
 
                 <clr-dg-row-detail *clrIfExpanded> 
-                    <p>
+                    <p class="p5 mt-0">
                         Data da simulação: <strong>{{ resource.simDate}}</strong> 
                         | Taxa de juros efetiva com bonificação: <strong>{{ resource.interest | number:'0.2-2':'pt'}}</strong> % a.a. <strong>{{ resource.interestAM | number:'0.2-2':'pt'}}</strong>% a.m. + TR 
                         | Custo Efetivo Total (CET) com bonificação: <strong>{{ resource.cet | number:'0.2-2':'pt'}}</strong> % a.a. 
