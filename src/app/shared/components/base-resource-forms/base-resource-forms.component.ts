@@ -199,10 +199,11 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   protected navigateToDisplay(resource: T): void {
     const parentComponentPath: string = this.route.snapshot.parent.url[0].path;
     const baseComponentPath: string = this.route.snapshot.url[0].path;
-    this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
-      .then(
-        () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'show'])
-      );
+    this.router.navigate([parentComponentPath, baseComponentPath]);
+    // this.router.navigateByUrl(parentComponentPath, {skipLocationChange: true})
+    //   .then(
+    //     () => this.router.navigate([parentComponentPath, baseComponentPath, resource.id, 'show'])
+    //   );
   }
 
   protected actionsForError(error: any): void {
