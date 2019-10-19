@@ -1,0 +1,5 @@
+p.inactive {
+  background-color: lightgray;
+  font-style: italic;
+  text-decoration: line-through;
+}

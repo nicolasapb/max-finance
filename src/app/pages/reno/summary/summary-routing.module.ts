@@ -5,7 +5,7 @@ import { SummaryComponent } from './summary/summary.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'summary',
     component: SummaryComponent
   }
 ];

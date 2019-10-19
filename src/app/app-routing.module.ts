@@ -47,7 +47,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reno/reno.module').then(mod => mod.RenoModule),
     data: [
       {
-        path: '/reno',
+        path: '/reno/summary',
         title: 'Resumo',
       },
       {

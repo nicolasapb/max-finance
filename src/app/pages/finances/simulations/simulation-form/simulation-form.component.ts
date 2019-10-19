@@ -32,9 +32,9 @@ export class SimulationFormComponent extends BaseResourceFormComponent<Simulatio
   }
 
   ngOnInit(): void {
-    super.ngOnInit();
+    super.ngOnInit(); 
     Object.keys(this.totals).forEach( key => {
-      if (this.totals.hasOwnProperty(key)) {
+      if (this.totals.hasOwnProperty(key) && (this.totals[key].type !== 'FGTS')) {
         this.totalsSelected.push({type: this.totals[key].type, amount: this.totals[key].amount, checked: false});
       }
     });

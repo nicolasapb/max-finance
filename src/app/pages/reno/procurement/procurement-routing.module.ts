@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProcurementListComponent } from './procurement-list/procurement-list.component';
 
 
 const routes: Routes = [
   {
-    path: '',
-    // loadChildren: () => import('./summary/summary.module').then(mod => mod.SummaryModule),
-    redirectTo: '/reno/summary',
-    pathMatch: 'full',
+    path: 'procurement',
+    component: ProcurementListComponent
   },
 ];
 
@@ -15,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RenoRoutingModule { }
+export class ProcurementRoutingModule { }

@@ -37,7 +37,7 @@
           <div class="card-block">
               <ul class="list-unstyled">
                 <li *ngFor="let prev of prevTotalByType">
-                   <p class="card-text"> <strong>{{prev.type}}:</strong> {{prev.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</p> 
+                   <p class="card-text" [class.inactive]="prev.type == 'FGTS'"> <strong>{{prev.type}}:</strong> {{prev.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</p> 
                 </li>
               </ul>
           </div>

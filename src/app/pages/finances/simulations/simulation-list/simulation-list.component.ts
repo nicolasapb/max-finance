@@ -67,7 +67,12 @@ export class SimulationListComponent extends BaseResourceList<Simulation> implem
   protected buildPrevTotal(): void {
     this.prevTotalByType = [];
     this.sumByTypeAndSimulationValue(this.prevTotalByType, true);
-    this.prevTotal = this.prevTotalByType.reduce( (val, entry) => val + +entry.amount, 0 );
+    this.prevTotal = this.prevTotalByType.reduce( (val, entry) => {
+      if (entry.type === 'FGTS') {
+        return val;
+      }
+      return val + +entry.amount;
+    }, 0 );
   }
 
   protected sumByTypeAndSimulationValue(totalByType: Array<TotalAmount>, simValue: boolean) {
