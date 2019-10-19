@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SummaryComponent } from './summary/summary.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./summary/summary.module').then(mod => mod.SummaryModule),
-  },
+    component: SummaryComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RenoRoutingModule { }
+export class SummaryRoutingModule { }

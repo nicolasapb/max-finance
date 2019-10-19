@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { RenoRoutingModule } from './reno-routing.module';
+import { SummaryModule } from './summary/summary.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    RenoRoutingModule
+    RenoRoutingModule,
+    SummaryModule
   ]
 })
 export class RenoModule { }

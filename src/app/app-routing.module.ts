@@ -41,6 +41,24 @@ const routes: Routes = [
         icon: 'plus'
       }
     ]
+  },
+  {
+    path: 'reno',
+    loadChildren: () => import('./pages/reno/reno.module').then(mod => mod.RenoModule),
+    data: [
+      {
+        path: '/reno',
+        title: 'Resumo',
+      },
+      {
+        path: '/reno/procurement',
+        title: 'Compras',
+      },
+      {
+        path: '/finances/simulations',
+        title: 'Simulações'
+      },
+    ]
   }
 ];
 
