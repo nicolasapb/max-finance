@@ -1,1 +1,74 @@
-<p>procurement-list works!</p>
+<app-page-header pageTitle="Compras" [spinner]="true" [spinnerCondition]="!resources">
+</app-page-header>
+
+<div class="mb-3">
+  <h3>Obra / Móveis / Eletremésticos / etc.</h3>
+</div>
+
+<a class="btn btn-sm" routerLink="new">adicionar</a>
+
+<div class="clr-row mb-5" *ngIf="resources" >
+
+  <div class="clr-col-sm-12 clr-col-md-9">
+
+    <div class="w-100">
+
+      <clr-datagrid class="">
+        <clr-dg-column [clrDgField]="'product'">
+          <ng-container *clrDgHideableColumn="{hidden: false}">
+            Produto
+          </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'amount'">
+          <ng-container *clrDgHideableColumn="{hidden: false}">
+            Valor
+          </ng-container>
+          <clr-dg-numeric-filter [clrDgNumericFilter]="amountFilter"></clr-dg-numeric-filter>
+        </clr-dg-column>
+
+        <clr-dg-placeholder>Nenhuma economia encontrada</clr-dg-placeholder>
+
+        <clr-dg-row *clrDgItems="let resource of resources" [clrDgItem]="resource">
+          <clr-dg-action-overflow [attr.aria-expanded]="!modalDeleteItemOpen">
+            <button class="action-item" (click)="showResource(resource)">Exibir</button>
+            <button class="action-item" (click)="editResource(resource)">Editar</button>
+            <button class="action-item" (click)="confirmToDelete(resource)">Deletar</button>
+          </clr-dg-action-overflow>
+          <clr-dg-cell>
+            {{ resource.product }} 
+          </clr-dg-cell>
+          <clr-dg-cell>{{+resource.amount | currency:'BRL':'symbol':'0.2-2':'pt' }}</clr-dg-cell> 
+
+          <ng-container ngProjectAs="clr-dg-row-detail" *ngIf="resource.link !== ''">
+            <clr-dg-row-detail *clrIfExpanded> 
+                <a [href]="resource.link" target="_blank">
+                  <img [src]="resource.img" width="350" height="350">
+                </a>
+            </clr-dg-row-detail>     
+          </ng-container>
+
+        </clr-dg-row>
+
+        <clr-dg-footer>
+          <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Itens por página</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            de {{pagination.totalItems}} lançamentos
+          </clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+
+</div>
+
+<clr-modal #acceptDelete [(clrModalOpen)]="modalDeleteItemOpen" [clrModalStaticBackdrop]="false">
+  <h3 class="modal-title">Confirma a exclusão do item?</h3>
+  <div class="modal-body">
+    <p>Esta operação não pode ser desfeita</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="onCancelModal()">cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="onAcceptModal()">aceitar</button>
+  </div>
+</clr-modal>
